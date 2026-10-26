@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>DeaDx — Roblox UI library by ServerDead</title>
+<meta name="description" content="DeaDx is a modular Roblox UI library by ServerDead: 21 components, 1559 icons with disk caching, themes, a hardened key system, Key+ and Luarmor support.">
+<meta property="og:title" content="DeaDx — Roblox UI library by ServerDead">
+<meta property="og:description" content="21 components, 1559 cached icons, 11 themes, a hardened key system and Key+ encrypted delivery.">
+<meta property="og:type" content="website">
+<meta name="theme-color" content="#08080a">
+<link rel="preconnect" href="https://unpkg.com">
+<link rel="stylesheet" href="assets/style.css">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%23ff2d40'/%3E%3Ctext x='16' y='22' font-family='monospace' font-size='16' font-weight='bold' text-anchor='middle' fill='%23fff'%3ED%3C/text%3E%3C/svg%3E">
+</head>
+<body>
+
+<header class="topbar">
+  <a class="brand" href="index.html">
+    <span class="mark">D</span>
+    <span>DeaDx <span class="by">by ServerDead</span></span>
+  </a>
+  <nav class="topnav">
+    <a href="index.html" class="active">Home</a>
+    <a href="docs.html">Docs</a>
+    <a href="icons.html">Icons</a>
+    <a class="ghost-btn" href="docs.html#install">
+      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><path d="M7 10l5 5 5-5"/><path d="M12 15V3"/></svg>
+      Install
+    </a>
+  </nav>
+</header>
+
+<div class="wrap">
+
+  <section class="hero">
+    <div class="hero-glow"></div>
+    <div class="container">
+      <div class="hero-grid">
+        <div>
+          <span class="eyebrow reveal"><i></i> v1.0.0 &middot; built by ServerDead</span>
+          <h1 class="reveal" data-delay="60">A Roblox UI library<br>that ships <span class="accent">finished</span>.</h1>
+          <p class="lead reveal" data-delay="130">21 components, 1559 icons cached to disk, 11 themes, a hardened key system with encrypted script delivery, and mobile support in every control. One file, or 79 modules — your call.</p>
+          <div class="hero-actions reveal" data-delay="190">
+            <a class="btn primary" href="docs.html">
+              Read the docs
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+            </a>
+            <a class="btn outline" href="icons.html">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7" rx="1.5"/><rect x="14" y="3" width="7" height="7" rx="1.5"/><rect x="3" y="14" width="7" height="7" rx="1.5"/><rect x="14" y="14" width="7" height="7" rx="1.5"/></svg>
+              Browse 1559 icons
+            </a>
+          </div>
+        </div>
+
+        <div class="hero-side reveal" data-delay="240">
+          <div class="code float">
+            <div class="code-head"><span class="dots"><i></i><i></i><i></i></span> paste this and you are done</div>
+            <pre><code>local DeaDx = loadstring(game:HttpGet(
+    "https://raw.githubusercontent.com/ServerDeadd/DeaDx/main/DeaDx.lua"
+))()
+
+local Window = DeaDx:CreateWindow({
+    Title = "My Hub",
+    SubTitle = "by ServerDead",
+    Size = UDim2.fromOffset(620, 460),
+    Acrylic = true,
+    Theme = "DeaDx",
+})
+
+local Tab = Window:AddTab({ Title = "Main", Icon = "rocket" })
+
+Tab:AddToggle("fly", {
+    Title = "Fly",
+    Description = "Hold space to rise",
+    Default = false,
+    Callback = function(on)
+        DeaDx:Notify({ Title = "Fly", Content = on and "on" or "off" })
+    end,
+})</code></pre>
+          </div>
+        </div>
+      </div>
+
+      <div class="stats reveal" data-delay="300">
+        <div class="stat"><div class="n" data-count="21">21</div><div class="l">COMPONENTS</div></div>
+        <div class="stat"><div class="n" data-count="1559">1559</div><div class="l">ICONS</div></div>
+        <div class="stat"><div class="n" data-count="11">11</div><div class="l">THEMES</div></div>
+        <div class="stat"><div class="n" data-count="79">79</div><div class="l">MODULES</div></div>
+        <div class="stat"><div class="n" data-count="2.7" data-suffix="ms">2.7ms</div><div class="l">DEFINE TIME</div></div>
+      </div>
+    </div>
+  </section>
+
+  <div class="sep"></div>
+
+  <section class="container band">
+    <h2 class="band-title reveal">Built for people who actually ship</h2>
+    <p class="band-lead reveal" data-delay="60">Every control below is in the library today, works on mobile, saves to config, and can be locked, cooled down, bound to a key or pinned to the status bar.</p>
+
+    <div class="grid three" data-stagger="70">
+      <div class="card">
+        <h4><span class="ico"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2v20"/><path d="m19 9-7 7-7-7"/></svg></span> Editable dropdowns</h4>
+        <p>Dropdowns whose options the player can type, rename and delete at runtime. The popup follows its anchor instead of the scroll.</p>
+      </div>
+      <div class="card">
+        <h4><span class="ico"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M7 9h10M7 14h6"/></svg></span> Inline editable values</h4>
+        <p>Click a number in any title or description and type a new one. No extra textbox, no modal, no layout jump.</p>
+      </div>
+      <div class="card">
+        <h4><span class="ico"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v18M3 12h18"/><circle cx="12" cy="12" r="9"/></svg></span> Icons cached to disk</h4>
+        <p>Pull an icon from Lucide, Iconsax, a URL or a Roblox asset. It lands in <code>DeaDx/icons/</code>, is verified by name <em>and</em> content hash, and is overwritten only when it really changed.</p>
+      </div>
+      <div class="card">
+        <h4><span class="ico"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></span> Hardened key system</h4>
+        <p>Validity lives in a weak-keyed vault behind an HMAC proof, not a boolean. A guard watches its own methods and trips in about two seconds when one is hooked.</p>
+      </div>
+      <div class="card">
+        <h4><span class="ico"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg></span> Key+ encrypted delivery</h4>
+        <p>Your server returns the hub encrypted, so there is no <code>true</code> to hook. The secret never leaves your backend — it can even be derived from the key the player typed.</p>
+      </div>
+      <div class="card">
+        <h4><span class="ico"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6"/><path d="m9 15 2 2 4-4"/></svg></span> Luarmor built in</h4>
+        <p>One call checks a Luarmor key, maps all 12 status codes to a readable line, and knows which failures are the player's fault and which are yours.</p>
+      </div>
+      <div class="card">
+        <h4><span class="ico"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2a10 10 0 1 0 10 10h-10z"/></svg></span> ESP preview cards</h4>
+        <p>A card with a live 3D player on the left and your toggles on the right, so the player sees the ESP before turning it on in the game.</p>
+      </div>
+      <div class="card">
+        <h4><span class="ico"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 20h16M4 4v16"/><path d="m8 16 3-6 3 3 4-7"/></svg></span> Status bar on the HUD</h4>
+        <p>FPS, ping, time, a custom name, or any component you pin — on top, in a corner, or wherever the player drags it.</p>
+      </div>
+      <div class="card">
+        <h4><span class="ico"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M12 2v3M12 19v3M2 12h3M19 12h3"/></svg></span> Locks and cooldowns</h4>
+        <p>Lock any control with a padlock, a blurred cover and a live <code>00:05</code> countdown, then watch it unlock itself.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="container band">
+    <h2 class="band-title reveal">Everything you can drop in a tab</h2>
+    <div class="marquee reveal">
+      <div class="marquee-track">
+        <span>Button</span><span>Toggle</span><span>Slider</span><span>Dropdown</span><span>MultiDropdown</span><span>Input</span><span>Keybind</span><span>Colorpicker</span><span>Paragraph</span><span>Label</span><span>Divider</span><span>Segmented</span><span>Progress</span><span>Countdown</span><span>Stat</span><span>Image</span><span>Code</span><span>List</span><span>Player</span><span>Preview</span><span>Graph</span>
+        <span>Button</span><span>Toggle</span><span>Slider</span><span>Dropdown</span><span>MultiDropdown</span><span>Input</span><span>Keybind</span><span>Colorpicker</span><span>Paragraph</span><span>Label</span><span>Divider</span><span>Segmented</span><span>Progress</span><span>Countdown</span><span>Stat</span><span>Image</span><span>Code</span><span>List</span><span>Player</span><span>Preview</span><span>Graph</span>
+      </div>
+    </div>
+    <div class="marquee reverse reveal" data-delay="80">
+      <div class="marquee-track">
+        <span>Notify</span><span>Ask</span><span>Prompt</span><span>Status bar</span><span>Loading screen</span><span>Key system</span><span>Key+</span><span>Luarmor</span><span>Theme editor</span><span>Config manager</span><span>Keybind panel</span><span>Console</span><span>Tour</span><span>Acrylic</span><span>Tooltips</span><span>Dialogs</span><span>Markup</span><span>Palette</span>
+        <span>Notify</span><span>Ask</span><span>Prompt</span><span>Status bar</span><span>Loading screen</span><span>Key system</span><span>Key+</span><span>Luarmor</span><span>Theme editor</span><span>Config manager</span><span>Keybind panel</span><span>Console</span><span>Tour</span><span>Acrylic</span><span>Tooltips</span><span>Dialogs</span><span>Markup</span><span>Palette</span>
+      </div>
+    </div>
+  </section>
+
+  <div class="sep"></div>
+
+  <section class="container band">
+    <div class="split">
+      <div class="reveal">
+        <span class="pill red">Two ways in</span>
+        <h2 class="band-title">One file to paste, 79 modules to read</h2>
+        <p>Ship the bundle and your users load a single URL. Work on the library and you get a folder per concern — <code>Core</code>, <code>Services</code>, <code>Components</code>, <code>Icons</code>, <code>Themes</code> — each file a plain module that takes <code>import</code> and returns a table.</p>
+        <p>Run <code>build.ps1</code> and the modules become <code>DeaDx.lua</code>. Nothing is generated by hand, nothing is duplicated.</p>
+        <a class="btn outline" href="docs.html#architecture">
+          See the architecture
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+        </a>
+      </div>
+      <div class="code reveal" data-delay="90">
+        <div class="code-head"><span class="dots"><i></i><i></i><i></i></span> src/</div>
+        <pre><code data-lang="text">src/
+├── init.luau            loader + module list
+├── Bootstrap.luau       public API
+├── Core/                Window Tab Card Section Component
+│                        Theme Config Markup Hash Integrity …
+├── Services/            KeySystem KeyPlus Luarmor Notification
+│                        StatusBar Loading Tour Console Acrylic …
+├── Components/          Button Toggle Slider Dropdown Preview
+│                        Graph Countdown Progress Player Code …
+├── Icons/               Catalog Svg Store Providers Registry
+└── Themes/              DeaDx Amoled Crimson Ocean Midnight …</code></pre>
+      </div>
+    </div>
+  </section>
+
+  <section class="container band">
+    <div class="split flip">
+      <div class="code reveal">
+        <div class="code-head"><span class="dots"><i></i><i></i><i></i></span> icons that cache themselves</div>
+        <pre><code>DeaDx:SetIconProvider("lucide")
+
+local Tab = Window:AddTab({ Title = "Combat", Icon = "swords" })
+
+DeaDx:RegisterIcon("logo", "https://my.site/logo.svg")
+Window:AddTab({ Title = "Hub", Icon = "logo" })
+
+Window:AddTab({ Title = "Shop", Icon = "rbxassetid://121962391563311" })
+
+local stats = DeaDx:GetIconStats()
+print(stats.Cached, stats.Hits, stats.Misses)</code></pre>
+      </div>
+      <div class="reveal" data-delay="90">
+        <span class="pill red">Icons</span>
+        <h2 class="band-title">Download once. Ever.</h2>
+        <p>Ask for <code>"swords"</code> and DeaDx resolves it through the provider you picked, writes the SVG to <code>DeaDx/icons/swords.svg</code>, stores a content hash beside it, and hands the next call the cached copy in about a millisecond.</p>
+        <p>If the source file changes, the hash stops matching, the file is overwritten in the background and <code>IconStore.Updated</code> fires. Nothing re-downloads while the hash still matches.</p>
+        <a class="btn outline" href="icons.html">
+          Browse the catalog
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <div class="sep"></div>
+
+  <section class="container band">
+    <h2 class="band-title reveal">Protection, measured — not promised</h2>
+    <p class="band-lead reveal" data-delay="60">Three ways to gate a hub, each tested against the attacks people actually run.</p>
+
+    <div class="grid three" data-stagger="80">
+      <div class="card tall">
+        <span class="pill">Key system</span>
+        <h4>HMAC vault, not a boolean</h4>
+        <p>Setting <code>_valid = true</code> does nothing — the unlocked state is an HMAC proof held in a weak table keyed by the instance, re-derived on every read. The built-in guard checks its own methods on a timer and locks back down when one is replaced.</p>
+      </div>
+      <div class="card tall">
+        <span class="pill red">Key+</span>
+        <h4>Nothing to hook</h4>
+        <p>Your server answers with the hub itself, encrypted. There is no boolean in the flow, so a hook returns an encrypted blob. Wrong key, expired stamp or forged signature all fail closed, and the secret stays on your backend.</p>
+      </div>
+      <div class="card tall">
+        <span class="pill">Luarmor</span>
+        <h4>Twelve codes, one line each</h4>
+        <p>The public SDK is downloaded once and cached. Every status code gets a readable message, and DeaDx knows the difference between a bad key (burn an attempt) and a bad script id (your mistake, no attempt burned).</p>
+      </div>
+    </div>
+
+    <div class="note warn reveal">
+      <span class="ico"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round"><path d="M12 9v4M12 17h.01"/><path d="M10.3 3.3 2.5 17a2 2 0 0 0 1.7 3h15.6a2 2 0 0 0 1.7-3L13.7 3.3a2 2 0 0 0-3.4 0z"/></svg></span>
+      <strong>Said plainly:</strong> nothing running in the player's executor is unbreakable. <code>getgc</code> can still find the vault, and hooking <code>IsValid</code> works until the guard notices. Key+ is the one that holds, because the script itself never reaches the client until the server decides to send it.
+    </div>
+  </section>
+
+  <section class="container band">
+    <div class="cta reveal">
+      <h2>Paste one line and build.</h2>
+      <p>No dependencies, no account, no build step. Credit goes to ServerDead.</p>
+      <div class="hero-actions">
+        <a class="btn primary" href="docs.html#install">Get started</a>
+        <a class="btn outline" href="docs.html#components">All 21 components</a>
+      </div>
+    </div>
+  </section>
+
+</div>
+
+<footer class="footer">
+  <div class="container">
+    <span>DeaDx &middot; built by <strong>ServerDead</strong></span>
+    <span>
+      <a href="docs.html">Docs</a> &nbsp;·&nbsp;
+      <a href="icons.html">Icons</a> &nbsp;·&nbsp;
+      <a href="docs.html#keysystem">Key system</a> &nbsp;·&nbsp;
+      <a href="docs.html#faq">FAQ</a>
+    </span>
+  </div>
+</footer>
+
+<script src="assets/app.js"></script>
+</body>
+</html>

@@ -1,0 +1,151 @@
+return function(import)
+	local Input = import("Services/Input")
+
+	local Drag = {}
+
+	local function isPointer(input)
+		return input.UserInputType == Enum.UserInputType.MouseButton1 or input.UserInputType == Enum.UserInputType.Touch
+	end
+
+	local function isMove(input, origin)
+		return input.UserInputType == Enum.UserInputType.MouseMovement or input == origin
+	end
+
+	function Drag.Track(handle, cleanup, onMove, onEnd, onBegin)
+		local stopCurrent
+		cleanup:Add(function()
+			if stopCurrent then
+				stopCurrent()
+			end
+		end)
+		cleanup:Add(handle.InputBegan:Connect(function(input)
+			if not isPointer(input) then
+				return
+			end
+			if onBegin and onBegin(input) == false then
+				return
+			end
+			if stopCurrent then
+				stopCurrent()
+			end
+			local running = true
+			local moveConnection, endConnection
+			local function stop()
+				if not running then
+					return
+				end
+				running = false
+				stopCurrent = nil
+				moveConnection:Disconnect()
+				endConnection:Disconnect()
+				if onEnd then
+					onEnd()
+				end
+			end
+			stopCurrent = stop
+			onMove(Vector2.new(input.Position.X, input.Position.Y))
+			moveConnection = Input.Changed:Connect(function(changed)
+				if running and isMove(changed, input) then
+					onMove(Vector2.new(changed.Position.X, changed.Position.Y))
+				end
+			end)
+			endConnection = input.Changed:Connect(function()
+				if input.UserInputState == Enum.UserInputState.End then
+					stop()
+				end
+			end)
+		end))
+	end
+
+	local function inside(frame, point)
+		if not frame or not frame.Visible then
+			return false
+		end
+		local origin, size = frame.AbsolutePosition, frame.AbsoluteSize
+		return point.X >= origin.X
+			and point.X <= origin.X + size.X
+			and point.Y >= origin.Y
+			and point.Y <= origin.Y + size.Y
+	end
+	Drag.Inside = inside
+
+	function Drag.Attach(handle, target, cleanup, opts)
+		opts = opts or {}
+		local margin = opts.Margin or 24
+		local startPosition, startPointer
+
+		local function begin(input)
+			if opts.Blocked and opts.Blocked() then
+				return false
+			end
+			local point = Vector2.new(input.Position.X, input.Position.Y)
+			for _, ignored in opts.Ignore or {} do
+				if inside(ignored, point) then
+					return false
+				end
+			end
+			startPosition = target.Position
+			startPointer = point
+			return true
+		end
+
+		Drag.Track(handle, cleanup, function(position)
+			if not startPosition or not startPointer then
+				return
+			end
+			local delta = position - startPointer
+			local x = startPosition.X.Offset + delta.X
+			local y = startPosition.Y.Offset + delta.Y
+			local parent = target.Parent
+			if parent and parent:IsA("GuiBase2d") then
+				local size = parent.AbsoluteSize
+				local px = math.clamp(startPosition.X.Scale * size.X + x, margin, size.X - margin)
+				local py = math.clamp(startPosition.Y.Scale * size.Y + y, margin, size.Y - margin)
+				x = px - startPosition.X.Scale * size.X
+				y = py - startPosition.Y.Scale * size.Y
+			end
+			target.Position = UDim2.new(startPosition.X.Scale, x, startPosition.Y.Scale, y)
+			if opts.OnMove then
+				opts.OnMove()
+			end
+		end, opts.OnEnd, begin)
+	end
+
+	function Drag.Resize(handle, target, cleanup, opts)
+		opts = opts or {}
+		local minSize = opts.Min or Vector2.new(300, 200)
+		local maxSize = opts.Max or Vector2.new(2000, 2000)
+		local startSize, startPosition, startPointer
+
+		local function begin(input)
+			startSize = target.Size
+			startPosition = target.Position
+			startPointer = Vector2.new(input.Position.X, input.Position.Y)
+			return true
+		end
+
+		Drag.Track(handle, cleanup, function(position)
+			if not startSize or not startPointer then
+				return
+			end
+			local scale = opts.GetScale and opts.GetScale() or 1
+			local delta = position - startPointer
+			local width = math.clamp(startSize.X.Offset + delta.X / scale, minSize.X, maxSize.X)
+			local height = math.clamp(startSize.Y.Offset + delta.Y / scale, minSize.Y, maxSize.Y)
+			local appliedX = (width - startSize.X.Offset) * scale
+			local appliedY = (height - startSize.Y.Offset) * scale
+			target.Size = UDim2.fromOffset(width, height)
+			target.Position = UDim2.new(
+				startPosition.X.Scale,
+				startPosition.X.Offset + appliedX * target.AnchorPoint.X,
+				startPosition.Y.Scale,
+				startPosition.Y.Offset + appliedY * target.AnchorPoint.Y
+			)
+			if opts.OnResize then
+				opts.OnResize()
+			end
+		end, opts.OnEnd, begin)
+	end
+
+	return Drag
+end

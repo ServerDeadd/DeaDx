@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Icons — DeaDx</title>
+<meta name="description" content="Search all 1559 icons bundled with DeaDx, copy the name or the Roblox asset id, and learn how to pull icons from Lucide, Iconsax, a URL or a Roblox asset.">
+<meta name="theme-color" content="#08080a">
+<link rel="preconnect" href="https://unpkg.com">
+<link rel="stylesheet" href="assets/style.css">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%23ff2d40'/%3E%3Ctext x='16' y='22' font-family='monospace' font-size='16' font-weight='bold' text-anchor='middle' fill='%23fff'%3ED%3C/text%3E%3C/svg%3E">
+</head>
+<body>
+
+<header class="topbar">
+  <a class="brand" href="index.html">
+    <span class="mark">D</span>
+    <span>DeaDx <span class="by">by ServerDead</span></span>
+  </a>
+  <nav class="topnav">
+    <a href="index.html">Home</a>
+    <a href="docs.html">Docs</a>
+    <a href="icons.html" class="active">Icons</a>
+    <a class="ghost-btn" href="docs.html#icons">
+      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 16v-4M12 8h.01"/><circle cx="12" cy="12" r="10"/></svg>
+      Icon API
+    </a>
+  </nav>
+</header>
+
+<div class="wrap">
+  <div class="container content">
+
+    <span class="eyebrow reveal"><i></i> 1559 icons, zero setup</span>
+    <h1 class="reveal" data-delay="60">Icon catalog</h1>
+    <p class="lead reveal" data-delay="110">Every icon below already has a Roblox asset id baked into the library, so it shows up without a single HTTP request. Click one to copy it.</p>
+
+    <div class="icon-tools reveal" data-delay="160">
+      <div class="icon-search">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
+        <input id="icon-filter" type="search" placeholder="Search 1559 icons — try sword, folder, chart, shield…" autocomplete="off" spellcheck="false">
+      </div>
+      <div class="seg" id="icon-modes">
+        <button type="button" data-mode="name" class="on">name</button>
+        <button type="button" data-mode="asset">rbxassetid</button>
+        <button type="button" data-mode="lua">Lua line</button>
+      </div>
+      <span class="icon-count" id="icon-count">1559 icons</span>
+    </div>
+
+    <div class="icon-grid" id="icon-grid"></div>
+    <div class="load-more" id="icon-more">
+      <button class="btn outline" type="button">Show more</button>
+    </div>
+
+    <h2 id="use" style="margin-top:64px">Using an icon</h2>
+    <p>Anywhere the library takes an <code>Icon</code>, these forms all work.</p>
+
+    <div class="code">
+      <div class="code-head"><span class="dots"><i></i><i></i><i></i></span> ways to name an icon</div>
+      <pre><code>Window:AddTab({ Title = "Combat", Icon = "swords" })
+
+Window:AddTab({ Title = "Shop", Icon = "rbxassetid://121962391563311" })
+
+Window:AddTab({ Title = "Hub", Icon = "https://my.site/logo.svg" })
+
+Window:AddTab({ Title = "Photo", Icon = "https://my.site/banner.png" })
+
+Window:AddTab({ Title = "Me", Icon = "rbxthumb://type=AvatarHeadShot&amp;id=1&amp;w=150&amp;h=150" })
+
+DeaDx:RegisterIcon("brand", "https://my.site/logo.svg")
+Window:AddTab({ Title = "Brand", Icon = "brand" })</code></pre>
+    </div>
+
+    <h2 id="photos">Photos, and the shape of them</h2>
+    <p>A photo is an icon like any other — an avatar, a decal you uploaded, a PNG on the web. It is drawn as a photo, not flattened into a theme-coloured silhouette, and you choose the corners.</p>
+
+    <div class="code">
+      <div class="code-head"><span class="dots"><i></i><i></i><i></i></span> square, rounded, circle</div>
+      <pre><code>local HEAD = "rbxthumb://type=AvatarHeadShot&amp;id=" .. me.UserId .. "&amp;w=150&amp;h=150"
+
+Section:AddButton({ Title = "Square", Icon = HEAD, IconShape = "Square" })
+Section:AddButton({ Title = "Rounded", Icon = HEAD, IconShape = "Rounded" })
+Section:AddButton({ Title = "Circle", Icon = HEAD, IconShape = "Circle", IconSize = 34 })
+Section:AddButton({ Title = "Exactly 4px", Icon = HEAD, IconCorner = 4 })</code></pre>
+    </div>
+
+    <p><code>IconShape</code>, <code>IconCorner</code>, <code>IconTint</code>, <code>IconScale</code> and <code>IconSize</code> work on every icon slot in the library — window, tab, section, card, component, status bar, notification, dialog and loading screen. The <a href="docs.html#icon-shapes">full reference is in the docs</a>.</p>
+
+    <div class="note warn">
+      <span class="ico"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round"><path d="M12 9v4M12 17h.01"/><path d="M10.3 3.3 2.5 17a2 2 0 0 0 1.7 3h15.6a2 2 0 0 0 1.7-3L13.7 3.3a2 2 0 0 0-3.4 0z"/></svg></span>
+      Roblox only draws <strong>PNG and JPG</strong>, and some hosts refuse Roblox's requests — Wikipedia answers with an HTML page, for instance. If a url fails, the console now says exactly why instead of quietly showing a question mark. GitHub raw, Imgur and most CDNs work; a Roblox decal via <code>rbxassetid://</code> always works and needs no download at all.
+    </div>
+
+    <div class="note good">
+      <span class="ico"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span>
+      Catalog names resolve to a Roblox asset id with <strong>no download at all</strong>. Only URLs and custom providers touch the network, and those are cached to disk after the first run.
+    </div>
+
+    <h2 id="sites">Where to find more icons</h2>
+    <p>The catalog is the Lucide set. For anything outside it, grab an SVG or PNG URL from one of these and feed it to <code>RegisterIcon</code> — DeaDx parses the SVG, rasterises it and caches the result.</p>
+
+    <div class="grid two" data-stagger="70">
+      <a class="card link" href="https://lucide.dev/icons/" target="_blank" rel="noopener">
+        <h4><span class="ico"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 3h6v6"/><path d="M10 14 21 3"/><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/></svg></span> Lucide</h4>
+        <p>The set that ships inside DeaDx. Copy the icon name straight from the site — if it exists in Lucide, it is almost certainly in the catalog above.</p>
+      </a>
+      <a class="card link" href="https://app.iconsax.io/" target="_blank" rel="noopener">
+        <h4><span class="ico"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 3h6v6"/><path d="M10 14 21 3"/><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/></svg></span> Iconsax</h4>
+        <p>Linear, bold, broken and bulk weights. Register it as a provider once and you can reference the whole set by name, same as the catalog.</p>
+      </a>
+      <a class="card link" href="https://create.roblox.com/store/decals" target="_blank" rel="noopener">
+        <h4><span class="ico"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 3h6v6"/><path d="M10 14 21 3"/><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/></svg></span> Roblox Creator Store</h4>
+        <p>Any decal or image asset you own. Pass <code>rbxassetid://ID</code> and it renders with no caching layer involved at all.</p>
+      </a>
+      <a class="card link" href="https://simpleicons.org/" target="_blank" rel="noopener">
+        <h4><span class="ico"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 3h6v6"/><path d="M10 14 21 3"/><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/></svg></span> Simple Icons</h4>
+        <p>Brand marks — Discord, YouTube, GitHub. Single-path SVGs, which is exactly what the parser handles best.</p>
+      </a>
+    </div>
+
+    <h2 id="cache">How the cache works</h2>
+    <p>Icons that come from a URL are written to the executor's workspace once and verified by content on every later run.</p>
+
+    <div class="code">
+      <div class="code-head"><span class="dots"><i></i><i></i><i></i></span> DeaDx/icons/</div>
+      <pre><code data-lang="text">DeaDx/icons/
+├── index.json       name → hash, size, when it was fetched
+├── rocket.svg       the file itself
+├── rocket.json      parsed geometry, ready to draw
+├── logo.svg
+└── logo.json</code></pre>
+    </div>
+
+    <ol>
+      <li><strong>First run</strong> — downloads the file, parses it, writes <code>name.svg</code>, <code>name.json</code> and a hash into <code>index.json</code>.</li>
+      <li><strong>Later runs</strong> — reads the local file and draws it. Measured at about <strong>1&nbsp;ms</strong>.</li>
+      <li><strong>Verification</strong> — in the background, the source is re-hashed. If the content changed, the file is overwritten and <code>IconStore.Updated</code> fires so your UI can refresh.</li>
+      <li><strong>Unchanged</strong> — nothing is written and nothing re-downloads.</li>
+    </ol>
+
+    <div class="code">
+      <div class="code-head"><span class="dots"><i></i><i></i><i></i></span> cache control</div>
+      <pre><code>DeaDx:SetIconVerify(true)
+
+local stats = DeaDx:GetIconStats()
+print(stats.Cached, stats.Hits, stats.Misses, stats.Bytes)
+
+DeaDx:ForgetIcon("logo")
+DeaDx:ClearIconCache()
+
+DeaDx.IconStore.Updated:Connect(function(name)
+    print(name .. " changed on the server, cache refreshed")
+end)</code></pre>
+    </div>
+
+    <p style="margin-top:34px">
+      <a class="btn outline" href="docs.html#icons">
+        Full icon API
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+      </a>
+    </p>
+
+  </div>
+</div>
+
+<footer class="footer">
+  <div class="container">
+    <span>DeaDx &middot; built by <strong>ServerDead</strong></span>
+    <span>
+      <a href="index.html">Home</a> &nbsp;·&nbsp;
+      <a href="docs.html">Docs</a> &nbsp;·&nbsp;
+      <a href="docs.html#icons">Icon API</a>
+    </span>
+  </div>
+</footer>
+
+<script src="assets/icons-data.js"></script>
+<script src="assets/app.js"></script>
+<script src="assets/icons.js"></script>
+</body>
+</html>

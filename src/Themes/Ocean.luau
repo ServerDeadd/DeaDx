@@ -1,0 +1,16 @@
+return {
+	Background = Color3.fromRGB(9, 18, 26),
+	SecondaryBackground = Color3.fromRGB(17, 31, 44),
+	TertiaryBackground = Color3.fromRGB(25, 44, 62),
+	Text = Color3.fromRGB(228, 242, 250),
+	MutedText = Color3.fromRGB(124, 155, 176),
+	Accent = Color3.fromRGB(56, 189, 248),
+	AccentText = Color3.fromRGB(8, 20, 30),
+	Border = Color3.fromRGB(31, 52, 72),
+	Hover = Color3.fromRGB(33, 56, 78),
+	Pressed = Color3.fromRGB(14, 26, 37),
+	AcrylicTint = Color3.fromRGB(28, 52, 72),
+	AcrylicGradient = ColorSequence.new(Color3.fromRGB(18, 35, 50), Color3.fromRGB(8, 16, 24)),
+	AcrylicNoise = 0.93,
+	AcrylicTransparency = 0.15,
+}

@@ -1,0 +1,1489 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Documentation — DeaDx</title>
+<meta name="description" content="Complete DeaDx documentation: windows, tabs, all 21 components, icons, themes, markup, status bar, notifications, key system, Key+, Luarmor and the anti-hook guard.">
+<meta name="theme-color" content="#08080a">
+<link rel="stylesheet" href="assets/style.css">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%23ff2d40'/%3E%3Ctext x='16' y='22' font-family='monospace' font-size='16' font-weight='bold' text-anchor='middle' fill='%23fff'%3ED%3C/text%3E%3C/svg%3E">
+</head>
+<body>
+
+<header class="topbar">
+  <button class="menu-btn" id="menu-btn" type="button" aria-label="open the menu">
+    <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M3 6h18M3 12h18M3 18h18"/></svg>
+  </button>
+  <a class="brand" href="index.html">
+    <span class="mark">D</span>
+    <span>DeaDx <span class="by">by ServerDead</span></span>
+  </a>
+  <nav class="topnav">
+    <a href="index.html" class="hide-sm">Home</a>
+    <a href="docs.html" class="active">Docs</a>
+    <a href="icons.html">Icons</a>
+  </nav>
+</header>
+
+<div class="shell">
+
+  <aside class="sidebar">
+    <div class="side-search">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
+      <input id="side-filter" type="search" placeholder="Filter the docs…" autocomplete="off" spellcheck="false">
+    </div>
+
+    <div class="side-group">
+      <h4>Start</h4>
+      <a href="#install">Install</a>
+      <a href="#first">Your first window</a>
+      <a href="#architecture">Architecture</a>
+    </div>
+
+    <div class="side-group">
+      <h4>Layout</h4>
+      <a href="#window">Window</a>
+      <a href="#tabs">Tabs and sub-tabs</a>
+      <a href="#sections">Sections and cards</a>
+    </div>
+
+    <div class="side-group">
+      <h4>Components</h4>
+      <a href="#components">All of them</a>
+      <a href="#common">Common fields</a>
+      <a href="#button">Button</a>
+      <a href="#toggle">Toggle</a>
+      <a href="#slider">Slider</a>
+      <a href="#dropdown">Dropdown</a>
+      <a href="#input">Input and keybind</a>
+      <a href="#colorpicker">Colorpicker</a>
+      <a href="#progress">Progress and countdown</a>
+      <a href="#data">Stat, graph, list</a>
+      <a href="#preview">Preview / ESP card</a>
+      <a href="#text">Text and media</a>
+    </div>
+
+    <div class="side-group">
+      <h4>Behaviour</h4>
+      <a href="#editable">Editable text</a>
+      <a href="#locks">Locks and cooldowns</a>
+      <a href="#dependencies">Dependencies</a>
+      <a href="#menu">Context menu</a>
+      <a href="#palette">Command palette</a>
+      <a href="#undo">Undo and redo</a>
+      <a href="#tour">Guided tour</a>
+    </div>
+
+    <div class="side-group">
+      <h4>Looks</h4>
+      <a href="#icons">Icons</a>
+      <a href="#icon-shapes">Photos and shapes</a>
+      <a href="#markup">Text markup</a>
+      <a href="#themes">Themes</a>
+      <a href="#animations">Animations</a>
+    </div>
+
+    <div class="side-group">
+      <h4>Services</h4>
+      <a href="#notifications">Notifications</a>
+      <a href="#statusbar">Status bar</a>
+      <a href="#loading">Loading screen</a>
+      <a href="#console">Console</a>
+      <a href="#panels">Built-in panels</a>
+      <a href="#config">Config</a>
+    </div>
+
+    <div class="side-group">
+      <h4>Protection</h4>
+      <a href="#keysystem">Key system</a>
+      <a href="#measured">What it withstands</a>
+      <a href="#luarmor">Luarmor</a>
+      <a href="#keyplus">Key+</a>
+      <a href="#keyplus-server">Key+ server</a>
+      <a href="#integrity">Anti-hook</a>
+    </div>
+
+    <div class="side-group">
+      <h4>Reference</h4>
+      <a href="#api">Full API</a>
+      <a href="#faq">FAQ</a>
+    </div>
+  </aside>
+
+  <main class="content">
+
+    <span class="eyebrow"><i></i> v1.0.0 &middot; by ServerDead</span>
+    <h1>Documentation</h1>
+    <p class="lead">Everything DeaDx does, with a copyable example for each one. Nothing here is planned or partial — it is all in the library today.</p>
+
+    <h2 id="install">Install</h2>
+    <p>Two builds, same API. The single file is what you ship; the modular loader is what you use while working on the library itself.</p>
+
+    <div class="code">
+      <div class="code-head"><span class="dots"><i></i><i></i><i></i></span> single file — no internal HTTP</div>
+      <pre><code>local DeaDx = loadstring(game:HttpGet(
+    "https://raw.githubusercontent.com/ServerDeadd/DeaDx/main/DeaDx.lua"
+))()</code></pre>
+    </div>
+
+    <div class="code">
+      <div class="code-head"><span class="dots"><i></i><i></i><i></i></span> modular — pulls each module from the repo</div>
+      <pre><code>local DeaDx = loadstring(game:HttpGet(
+    "https://raw.githubusercontent.com/ServerDeadd/DeaDx/main/src/init.luau"
+))()</code></pre>
+    </div>
+
+    <div class="note">
+      <span class="ico"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round"><path d="M12 16v-4M12 8h.01"/><circle cx="12" cy="12" r="10"/></svg></span>
+      Loading DeaDx twice is safe — the second load unloads the first one. There is no leftover ScreenGui and no duplicated keybind.
+    </div>
+
+    <h2 id="first">Your first window</h2>
+    <p>A window, a tab, a section and three controls. That is a working hub.</p>
+
+    <div class="code">
+      <div class="code-head"><span class="dots"><i></i><i></i><i></i></span> the whole thing</div>
+      <pre><code>local DeaDx = loadstring(game:HttpGet(
+    "https://raw.githubusercontent.com/ServerDeadd/DeaDx/main/DeaDx.lua"
+))()
+
+local Window = DeaDx:CreateWindow({
+    Title = "My Hub",
+    SubTitle = "by ServerDead",
+    Icon = "zap",
+    Size = UDim2.fromOffset(620, 460),
+    Acrylic = true,
+    MinimizeKey = Enum.KeyCode.RightControl,
+})
+
+local Main = Window:AddTab({ Title = "Main", Icon = "house" })
+local Combat = Main:AddSection({ Title = "Combat", Icon = "swords" })
+
+Combat:AddToggle("aimbot", {
+    Title = "Aimbot",
+    Description = "Locks on the closest head",
+    Default = false,
+    Callback = function(on)
+        MyHub.Aimbot = on
+    end,
+})
+
+Combat:AddSlider("fov", {
+    Title = "FOV",
+    Min = 10, Max = 400, Default = 120, Increment = 5, Suffix = "px",
+    Callback = function(value) MyHub.Fov = value end,
+})
+
+Combat:AddButton({
+    Title = "Reset settings",
+    Cooldown = 3,
+    Callback = function() DeaDx:ResetConfig() end,
+})
+
+DeaDx:Notify({ Title = "Loaded", Content = "Right Ctrl hides the window.", Type = "Success" })</code></pre>
+    </div>
+
+    <h2 id="architecture">Architecture</h2>
+    <p>Every file in <code>src/</code> is a module that takes <code>import</code> and returns a table. Nothing reaches for a global, nothing requires anything by path, and <code>import</code> memoises, so a module runs once no matter how many others pull it in.</p>
+
+    <div class="code">
+      <div class="code-head"><span class="dots"><i></i><i></i><i></i></span> src/Components/MyThing.luau</div>
+      <pre><code>return function(import)
+    local Utility = import("Core/Utility")
+    local Widgets = import("Core/Widgets")
+
+    return function(ctx, id, config)
+        local base = ctx.Component(ctx, id, config)
+        -- build into base.Frame / base.Right
+        return base
+    end
+end</code></pre>
+    </div>
+
+    <p>Register it and it becomes <code>Section:AddMyThing(...)</code>:</p>
+
+    <div class="code">
+      <div class="code-head"><span class="dots"><i></i><i></i><i></i></span> your own component</div>
+      <pre><code>DeaDx:RegisterComponent("MyThing", function(ctx, id, config)
+    local base = DeaDx.Component.Base(ctx, id, config)
+    return base
+end)
+
+Section:AddMyThing("thing", { Title = "Mine" })</code></pre>
+    </div>
+
+    <p><code>build.ps1</code> concatenates every module into <code>DeaDx.lua</code>. Components are imported on demand and the icon catalog is only parsed when the first icon is asked for, so the library defines itself in a couple of milliseconds — check <code>DeaDx.LoadTime</code>.</p>
+
+    <h2 id="window">Window</h2>
+
+    <div class="code">
+      <div class="code-head"><span class="dots"><i></i><i></i><i></i></span> every window field</div>
+      <pre><code>local Window = DeaDx:CreateWindow({
+    Title = "DeaDx",
+    SubTitle = "by ServerDead",
+    Icon = "zap",
+    IconColor = "#FF2D40",
+
+    Size = UDim2.fromOffset(620, 460),
+    Position = UDim2.fromScale(0.5, 0.5),
+    MinSize = Vector2.new(420, 300),
+    MaxSize = Vector2.new(1100, 820),
+
+    Theme = "DeaDx",
+    Font = Enum.Font.GothamMedium,
+    Scale = 1,
+    LockTheme = "DeaDx",
+    LockScale = 1,
+
+    Acrylic = true,
+    Blur = true,
+    Glass = true,
+    Background = {
+        Image = "https://my.site/bg.png",
+        Transparency = 0.82,
+        Gradient = { "#FF2D40", "#0A0A0C" },
+        ScaleType = Enum.ScaleType.Crop,
+    },
+
+    Resize = true,
+    Search = true,
+    Palette = true,
+    CloseButton = true,
+    CollapseButton = true,
+    MaximizeButton = false,
+    RestoreButton = true,
+    ConfirmClose = false,
+    PopupsOutside = false,
+
+    Footer = "v1.0.0",
+    MinimizeKey = Enum.KeyCode.RightControl,
+    SaveFile = "myhub",
+    OnClose = function() print("closed") end,
+})</code></pre>
+    </div>
+
+    <table>
+      <thead><tr><th>Field</th><th>Default</th><th>What it does</th></tr></thead>
+      <tbody>
+        <tr><td><code>Title</code> <code>SubTitle</code> <code>Icon</code> <code>IconColor</code></td><td>—</td><td>The top bar. Title and subtitle accept markup.</td></tr>
+        <tr><td><code>Size</code> <code>Position</code> <code>MinSize</code> <code>MaxSize</code></td><td>580×440</td><td>Size and resize limits.</td></tr>
+        <tr><td><code>Theme</code> <code>Font</code> <code>Scale</code></td><td>DeaDx / Gotham / 1</td><td>Starting look.</td></tr>
+        <tr><td><code>LockTheme</code> <code>LockScale</code></td><td>—</td><td>Pin the theme or the UI scale so the player cannot change it.</td></tr>
+        <tr><td><code>Acrylic</code> <code>Blur</code> <code>Glass</code></td><td>true</td><td>Translucent background plus real 3D glass behind the window.</td></tr>
+        <tr><td><code>Background</code></td><td>—</td><td><code>{ Image, Transparency, Color, Gradient, ScaleType }</code></td></tr>
+        <tr><td><code>Resize</code> <code>Search</code> <code>Palette</code></td><td>true</td><td>Resize grip, search box, <code>Ctrl+K</code> palette.</td></tr>
+        <tr><td><code>CloseButton</code> <code>CollapseButton</code></td><td>true</td><td>Top-bar buttons.</td></tr>
+        <tr><td><code>MaximizeButton</code> <code>ConfirmClose</code></td><td>false</td><td>Extras: maximise, and an "are you sure" on close.</td></tr>
+        <tr><td><code>RestoreButton</code></td><td>true</td><td>The floating pill that brings the window back.</td></tr>
+        <tr><td><code>PopupsOutside</code></td><td>false</td><td>Let dropdown popups leave the window bounds.</td></tr>
+        <tr><td><code>MinimizeKey</code> <code>SaveFile</code> <code>OnClose</code></td><td>—</td><td>Hide key, config file name, close callback.</td></tr>
+      </tbody>
+    </table>
+
+    <h3>Window methods</h3>
+    <div class="code">
+      <div class="code-head"><span class="dots"><i></i><i></i><i></i></span> methods</div>
+      <pre><code>Window:SelectTab("Main")          Window:GetTab("Main")
+Window:SetTitle("New")            Window:SetTitleColor("#FF2D40")
+Window:SetSubTitle("sub")         Window:SetIcon("flame")
+Window:SetFooter("v1.1")          Window:SetTheme("Midnight")
+Window:SetSearchEnabled(false)    Window:SetBackgroundImage(url)
+Window:SetBackground({ Gradient = { "#000", "#FF2D40" } })
+Window:SetAcrylic(false)          Window:SetTransparency(0.2)
+Window:SetMinimizeKey(Enum.KeyCode.Insert)
+Window:SetCollapsed(true)         Window:ToggleCollapsed()
+Window:SetMaximized(true)         Window:Minimize()
+Window:Restore()                  Window:Toggle()
+Window:IsMinimized()              Window:Notify({ ... })
+Window:CreateDialog({ ... })      Window:GetPalette()
+Window:Tour(steps, options)       Window:SetUndoKeys(key, redoKey)
+Window:Save("name")               Window:Load("name")
+Window:SetAutoSave(true)          Window:Destroy()</code></pre>
+    </div>
+
+    <div class="note good">
+      <span class="ico"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span>
+      Collapsing pulls the window <strong>up</strong> and keeps the top bar exactly where it was, instead of shrinking toward the middle.
+    </div>
+
+    <h2 id="tabs">Tabs and sub-tabs</h2>
+
+    <div class="code">
+      <div class="code-head"><span class="dots"><i></i><i></i><i></i></span> tabs</div>
+      <pre><code>local Main = Window:AddTab({
+    Title = "Main",
+    Icon = "house",
+    IconColor = "#FF2D40",
+    Badge = "3",
+})
+
+local Alerts = Main:AddSubTab({ Title = "Alerts", Icon = "bell" })
+
+Main:SetBadge(#targets)
+Main:SetBadge(nil)
+
+Main:SetTitle("Home")
+Main:SetIcon("flame")
+Main:Select()</code></pre>
+    </div>
+
+    <p>A tab badge is for a live counter — it hides itself when the window gets too narrow for it. Sub-tabs are full containers: anything you can add to a tab, you can add to a sub-tab.</p>
+
+    <h2 id="sections">Sections and cards</h2>
+
+    <div class="code">
+      <div class="code-head"><span class="dots"><i></i><i></i><i></i></span> containers</div>
+      <pre><code>local Combat = Main:AddSection({
+    Title = "Combat",
+    Icon = "swords",
+    Collapsible = true,
+    Collapsed = false,
+})
+
+local Aim = Main:AddCard({
+    Title = "Aim",
+    Icon = "crosshair",
+    Accent = "#38BDF8",
+    Badge = "NEW",
+    Collapsible = true,
+})
+
+local Inner = Aim:AddCard({ Title = "Nested" })</code></pre>
+    </div>
+
+    <p>A card gets an accent rail down its side, an optional badge, and can hold another card. Both sections and cards collapse with the height animated rather than just disappearing.</p>
+
+    <h2 id="components">All 21 components</h2>
+    <p>Every one of these works on mobile, saves to config when given an id, and supports locks, cooldowns, keybinds and the context menu.</p>
+
+    <div class="code">
+      <div class="code-head"><span class="dots"><i></i><i></i><i></i></span> one line each</div>
+      <pre><code>Section:AddButton({ Title = "Run", Cooldown = 5, Callback = function() end })
+Section:AddToggle("fly", { Title = "Fly", Default = false, Color = "#4ADE80" })
+Section:AddSlider("fov", { Title = "FOV", Min = 10, Max = 400, Default = 120, Increment = 5, Suffix = "px" })
+Section:AddDropdown("profile", { Title = "Profile", Values = { "Legit", "Rage" } })
+Section:AddMultiDropdown("parts", { Title = "Hitboxes", Values = { "Head", "Torso" } })
+Section:AddInput("key", { Title = "Key", Placeholder = "paste it", MaxLength = 32, Live = true })
+Section:AddKeybind("panic", { Title = "Panic", Default = Enum.KeyCode.P, Mode = "Toggle" })
+Section:AddColorpicker("color", { Title = "Color", Default = Color3.new(1, 0, 0) })
+Section:AddSegmented("mode", { Title = "Mode", Values = { "Legit", "Semi", "Rage" } })
+Section:AddProgress("load", { Title = "Progress", Default = 0.35 })
+Section:AddCountdown("timer", { Title = "Time left", Seconds = 30 })
+Section:AddStat("kills", { Title = "Kills", Trend = true, Short = true })
+Section:AddGraph({ Title = "FPS", Source = function() return workspace:GetRealPhysicsFPS() end })
+Section:AddPlayer("target", { Title = "Target" })
+Section:AddList("whitelist", { Title = "Whitelist", Default = { "ServerDead" } })
+Section:AddCode({ Title = "Loadstring", Default = "loadstring(...)()" })
+Section:AddImage({ Image = "https://my.site/banner.png", Title = "Banner", Height = 120 })
+Section:AddPreview({ Title = "ESP preview" })
+Section:AddParagraph({ Title = "Note", Content = "text &lt;b&gt;with markup&lt;/b&gt;" })
+Section:AddLabel({ Title = "Just a label" })
+Section:AddDivider({ Title = "danger zone" })</code></pre>
+    </div>
+
+    <h2 id="common">Common fields and methods</h2>
+    <p>These work on every component above.</p>
+
+    <table>
+      <thead><tr><th>Field</th><th>What it does</th></tr></thead>
+      <tbody>
+        <tr><td><code>Title</code> <code>Description</code></td><td>The two lines of text. Both accept markup.</td></tr>
+        <tr><td><code>Icon</code> <code>IconColor</code></td><td>Icon on the left, in any of the four icon forms.</td></tr>
+        <tr><td><code>TitleColor</code> <code>TitleGradient</code> <code>DescriptionColor</code></td><td>Text colours — hex, <code>Color3</code>, a theme token, or a list of stops for a gradient.</td></tr>
+        <tr><td><code>EditableTitle</code> <code>EditableDescription</code></td><td>Let the player rewrite the text in place.</td></tr>
+        <tr><td><code>Tooltip</code> <code>Badge</code></td><td>Hover text, and a small pill on the right.</td></tr>
+        <tr><td><code>Cooldown</code> <code>Locked</code></td><td>Seconds to lock after use, or start locked.</td></tr>
+        <tr><td><code>Visible</code> <code>Enabled</code></td><td>Start hidden or greyed out.</td></tr>
+        <tr><td><code>Key</code> <code>Menu</code></td><td>A keybind from birth, and extra context-menu entries (<code>Menu = false</code> turns the menu off).</td></tr>
+        <tr><td><code>VisibleWhen</code> <code>EnabledWhen</code></td><td>Tie this control to another one — see <a href="#dependencies">dependencies</a>.</td></tr>
+      </tbody>
+    </table>
+
+    <div class="code">
+      <div class="code-head"><span class="dots"><i></i><i></i><i></i></span> methods on any component</div>
+      <pre><code>c:GetValue()            c:SetValue(v)        c:OnChanged(fn)
+c:SetCallback(fn)       c:Trigger()          c:Flash()
+c:SetTitle(s)           c:SetDescription(s)
+c:SetTitleColor(c)      c:SetTitleGradient({ "#FF2D40", "#FACC15" })
+c:SetTextColor(c)       c:SetBadge("NEW")
+c:SetIcon("flame")      c:SetIconColor("#FF2D40")
+c:SetEditable(true)     c:Edit()
+c:Lock(10)              c:Unlock()           c:IsLocked()
+c:GetLockRemaining()    c:SetCooldown(5)     c:Shake()
+c:SetVisible(true)      c:SetEnabled(false)  c:SetTooltip("why")
+c:Bind(Enum.KeyCode.F)  c:DependOn(spec)     c:Destroy()</code></pre>
+    </div>
+
+    <h2 id="button">Button</h2>
+    <div class="code">
+      <div class="code-head"><span class="dots"><i></i><i></i><i></i></span> button</div>
+      <pre><code>Section:AddButton({
+    Title = "Rejoin",
+    Description = "Same server, fresh character",
+    Icon = "rotate-ccw",
+    Cooldown = 5,
+    Confirm = "Rejoin now?",
+    Callback = function()
+        game:GetService("TeleportService"):Teleport(game.PlaceId)
+    end,
+})</code></pre>
+    </div>
+
+    <h2 id="toggle">Toggle</h2>
+    <p>The hub pattern — a toggle with the colour picker for that feature sitting right next to it.</p>
+
+    <div class="code">
+      <div class="code-head"><span class="dots"><i></i><i></i><i></i></span> toggle with a built-in picker</div>
+      <pre><code>local box = Section:AddToggle("espbox", {
+    Title = "Box",
+    Picker = Color3.fromRGB(255, 45, 64),
+    Callback = function(on) MyEsp.Box = on end,
+})
+
+Section:AddToggle("espname", {
+    Title = "Name",
+    Picker = {
+        Default = Color3.fromRGB(80, 220, 255),
+        Transparency = 0,
+        Rainbow = true,
+    },
+})
+
+box.Picker:GetHex()
+box.Picker:SetRainbow(true)</code></pre>
+    </div>
+
+    <p>The picker's id becomes <code>&lt;id&gt;/Picker</code>, so it saves into the config along with the toggle.</p>
+
+    <h2 id="slider">Slider</h2>
+    <div class="code">
+      <div class="code-head"><span class="dots"><i></i><i></i><i></i></span> slider</div>
+      <pre><code>local fov = Section:AddSlider("fov", {
+    Title = "FOV",
+    Description = "Aim circle radius",
+    Min = 10,
+    Max = 400,
+    Default = 120,
+    Increment = 5,
+    Suffix = "px",
+    Decimals = 0,
+    Gradient = { "#FF2D40", "#FACC15" },
+    Callback = function(value) MyHub.Fov = value end,
+})
+
+fov:SetValue(240)
+fov:SetRange(1, 800)</code></pre>
+    </div>
+
+    <p>The knob grows while being dragged, and the value is editable — click the number and type.</p>
+
+    <h2 id="dropdown">Dropdown</h2>
+    <p>This is the headline control: options the player can rename, add and delete at runtime, and a popup that follows its button instead of the page scroll.</p>
+
+    <div class="code">
+      <div class="code-head"><span class="dots"><i></i><i></i><i></i></span> editable dropdown</div>
+      <pre><code>local profile = Section:AddDropdown("profile", {
+    Title = "Profile",
+    Values = { "Default", "Legit", "Rage" },
+    Default = "Default",
+
+    Editable = true,     -- rename an option in place
+    Creatable = true,    -- a "+ Add option" row
+    Removable = true,    -- a bin icon per option
+    Searchable = true,   -- filter box, automatic above 8 options
+
+    Icons  = { Default = "user", Legit = "shield", Rage = "flame" },
+    Colors = { Rage = "#FF2D40", Legit = "#4ADE80" },
+
+    OnRename = function(old, new) print(old, "->", new) end,
+    Callback = function(value) MyHub.Profile = value end,
+})
+
+profile:AddValue("Silent", { Icon = "eye-off", Color = "#38BDF8" })
+profile:RenameValue("Rage", "Ragebot")
+profile:RemoveValue("Legit")
+profile:SetValues({ "A", "B" })
+profile:Refresh()</code></pre>
+    </div>
+
+    <div class="note">
+      <span class="ico"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round"><path d="M12 16v-4M12 8h.01"/><circle cx="12" cy="12" r="10"/></svg></span>
+      Renaming carries the selection, the icon and the colour across with it. The popup closes itself when the button scrolls out of view.
+    </div>
+
+    <div class="code">
+      <div class="code-head"><span class="dots"><i></i><i></i><i></i></span> multi select</div>
+      <pre><code>local parts = Section:AddMultiDropdown("hitboxes", {
+    Title = "Hitboxes",
+    Values = { "Head", "Torso", "Arms", "Legs" },
+    Default = { "Head" },
+    Max = 3,
+    Callback = function(list) MyHub.Parts = list end,
+})
+
+parts:SelectAll()
+parts:SelectNone()
+parts:GetValue()   -- { "Head", "Torso" }</code></pre>
+    </div>
+
+    <h2 id="input">Input and keybind</h2>
+    <div class="code">
+      <div class="code-head"><span class="dots"><i></i><i></i><i></i></span> input</div>
+      <pre><code>Section:AddInput("webhook", {
+    Title = "Webhook",
+    Placeholder = "https://discord.com/api/webhooks/…",
+    Default = "",
+    MaxLength = 220,
+    Live = true,          -- fire on every keystroke, not just Enter
+    Numeric = false,
+    ClearButton = true,
+    Callback = function(text) MyHub.Webhook = text end,
+})</code></pre>
+    </div>
+
+    <div class="code">
+      <div class="code-head"><span class="dots"><i></i><i></i><i></i></span> keybind</div>
+      <pre><code>Section:AddKeybind("panic", {
+    Title = "Panic",
+    Default = Enum.KeyCode.P,
+    Mode = "Toggle",      -- Toggle · Hold · Always
+    Modifiers = { Enum.KeyCode.LeftShift },
+    AllowMouse = true,
+    Callback = function(active) MyHub.Panic = active end,
+})</code></pre>
+    </div>
+
+    <p>Changing a keybind pulses a glow around its border, so the player sees the change register without reading anything.</p>
+
+    <h2 id="colorpicker">Colorpicker</h2>
+    <div class="code">
+      <div class="code-head"><span class="dots"><i></i><i></i><i></i></span> colorpicker</div>
+      <pre><code>local color = Section:AddColorpicker("esp", {
+    Title = "ESP colour",
+    Default = Color3.fromRGB(255, 45, 64),
+    Transparency = 0,
+    Rainbow = false,
+    Swatches = true,     -- saved colours, kept in the config
+    Harmony = true,      -- complementary, triad, analogous, shade, tint
+    Callback = function(c, alpha) MyEsp.Color = c end,
+})
+
+color:SetRainbow(true, 1.4)
+color:IsRainbow()
+color:GetHex()
+color:Copy()
+color:Save()
+color:Harmonies()
+color:SetValueRGB(Color3.new(1, 0, 0), 0.2)</code></pre>
+    </div>
+
+    <p>Inside the popup: an SV square, hue and alpha bars, saved swatches (click to use, right-click to delete, <code>+</code> to save the current one), generated harmonies, HEX / RGB / HSV fields, a <strong>Rainbow</strong> switch that cycles the colour and keeps firing your callback — which is what you want for animated chams — plus reset and copy-hex.</p>
+
+    <h2 id="progress">Progress and countdown</h2>
+    <p>The countdown is a slider with the knob taken off, for a timer or a percentage the player just watches.</p>
+
+    <div class="code">
+      <div class="code-head"><span class="dots"><i></i><i></i><i></i></span> countdown</div>
+      <pre><code>local timer = Section:AddCountdown("timer", {
+    Title = "Next steal",
+    Seconds = 30,
+    AutoStart = false,
+    Loop = false,
+    Gradient = { "#FF2D40", "#FACC15" },
+    OnFinish = function() DeaDx:Notify({ Title = "Go" }) end,
+})
+
+timer:Start(60)      timer:Pause()     timer:Resume()
+timer:Reset()        timer:AddTime(10) timer:GetRemaining()</code></pre>
+    </div>
+
+    <div class="code">
+      <div class="code-head"><span class="dots"><i></i><i></i><i></i></span> progress</div>
+      <pre><code>local bar = Section:AddProgress("load", { Title = "Loading", Default = 0 })
+
+bar:SetProgress(0.5)
+bar:Increment(0.1)
+bar:Complete()
+bar:SetIndeterminate(true)</code></pre>
+    </div>
+
+    <div class="note good">
+      <span class="ico"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span>
+      <code>Pause</code> then <code>Resume</code> carries on from where it stopped. It does not jump back to the starting value.
+    </div>
+
+    <h2 id="data">Stat, graph, list and player</h2>
+
+    <div class="code">
+      <div class="code-head"><span class="dots"><i></i><i></i><i></i></span> stat</div>
+      <pre><code>local kills = Section:AddStat("kills", {
+    Title = "Kills",
+    Value = 0,
+    Trend = true,      -- arrow + delta against the previous value
+    Short = true,      -- 12400 shows as 12.4k
+    Icon = "swords",
+})
+
+kills:SetValue(27)
+kills:Increment(1)</code></pre>
+    </div>
+
+    <div class="code">
+      <div class="code-head"><span class="dots"><i></i><i></i><i></i></span> live graph</div>
+      <pre><code>local fps = Section:AddGraph({
+    Title = "FPS",
+    Icon = "activity",
+    Source = function() return workspace:GetRealPhysicsFPS() end,
+    Interval = 0.25,
+    Capacity = 90,
+    Gradient = { "#FF2D40", "#FACC15" },
+})
+
+fps:Push(144)
+fps:Latest()   fps:Average()   fps:Bounds()
+fps:Clear()    fps:Bind(fn)    fps:Unbind()</code></pre>
+    </div>
+
+    <div class="code">
+      <div class="code-head"><span class="dots"><i></i><i></i><i></i></span> list and player picker</div>
+      <pre><code>local wl = Section:AddList("whitelist", {
+    Title = "Whitelist",
+    Default = { "ServerDead" },
+    Placeholder = "add a name",
+    Max = 50,
+})
+
+wl:Add("Friend")   wl:Remove("Friend")   wl:Clear()
+wl:Has("ServerDead")   wl:GetValue()
+
+local target = Section:AddPlayer("target", {
+    Title = "Target",
+    Avatars = true,
+    IncludeSelf = false,
+    Callback = function(player) MyHub.Target = player end,
+})
+
+target:Refresh()
+target:GetPlayer()</code></pre>
+    </div>
+
+    <h2 id="preview">Preview / ESP card</h2>
+    <p>A card with a live 3D player on the left and your toggles on the right. The player sees what the ESP looks like before switching it on in the game.</p>
+
+    <div class="code">
+      <div class="code-head"><span class="dots"><i></i><i></i><i></i></span> ESP preview</div>
+      <pre><code>local Esp = Visual:AddPreview({
+    Title = "ESP preview",
+    Icon = "scan",
+    Label = "ServerDead",
+    Height = 210,
+})
+
+for _, feature in { "Box", "Corners", "Name", "Distance", "Health", "Tracer", "Skeleton", "Chams" } do
+    Esp:AddToggle({
+        Title = feature,
+        Callback = function(on)
+            Esp:SetFeature(feature, on)   -- the preview
+            MyEsp[feature] = on           -- the game
+        end,
+    })
+end
+
+Esp:SetModel(game.Players.SomeoneElse)   -- a Player or any Model
+Esp:SetColor("#FF2D40")
+Esp:SetThickness(2)
+Esp:SetHealth(0.4)
+Esp:SetSpin(false)
+Esp:AddButton({ Title = "Reset", Callback = function() Esp:SetSpin(true) end })</code></pre>
+    </div>
+
+    <p>The model turns on its own and can be dragged with the mouse. With no character available it falls back to a built-in dummy.</p>
+
+    <h2 id="text">Text, code and media</h2>
+    <div class="code">
+      <div class="code-head"><span class="dots"><i></i><i></i><i></i></span> text components</div>
+      <pre><code>Section:AddParagraph({
+    Title = "Heads up",
+    Content = "Run this &lt;b&gt;before&lt;/b&gt; joining. &lt;red&gt;Do not share your key.&lt;/red&gt;",
+})
+
+Section:AddLabel({ Title = "&lt;gradient:#FF2D40:#FACC15&gt;Visuals&lt;/gradient&gt;" })
+
+Section:AddDivider({ Title = "danger zone" })
+
+Section:AddCode({
+    Title = "Loadstring",
+    Default = 'loadstring(game:HttpGet("https://…"))()',
+    Copy = true,
+    Lines = 4,
+})
+
+Section:AddImage({
+    Image = "https://my.site/banner.png",
+    Title = "Banner",
+    Height = 120,
+    Corner = 12,
+})</code></pre>
+    </div>
+
+    <h2 id="editable">Editable text</h2>
+    <p>Set <code>EditableTitle</code> and a pencil shows up on hover. Click it — or double-click the text — and you edit in place, where the text already is. Enter confirms, Esc cancels, and the layout does not jump.</p>
+
+    <div class="code">
+      <div class="code-head"><span class="dots"><i></i><i></i><i></i></span> editable</div>
+      <pre><code>local t = Section:AddToggle("fly", {
+    Title = "Fly",
+    Description = "speed 50",
+    EditableTitle = true,
+    EditableDescription = true,
+    OnTitleChanged = function(text) print("renamed to", text) end,
+})
+
+t:SetEditable(true)
+t:Edit()           -- open the editor from code</code></pre>
+    </div>
+
+    <h2 id="locks">Locks and cooldowns</h2>
+    <div class="code">
+      <div class="code-head"><span class="dots"><i></i><i></i><i></i></span> locking anything</div>
+      <pre><code>Section:AddButton({ Title = "Run", Cooldown = 5 })   -- locks itself after a click
+
+c:Lock(10)                  -- 10 seconds, counting down as 00:10
+c:Lock(0, "Premium only")   -- locked until you say otherwise, with a reason
+c:Unlock()
+c:IsLocked()
+c:GetLockRemaining()</code></pre>
+    </div>
+
+    <p>A padlock appears with the countdown, a frosted cover slides over the control, a time bar runs underneath, and a sheen passes across on hover. Clicking while locked shakes the padlock instead of doing nothing silently.</p>
+
+    <h2 id="dependencies">Dependencies between components</h2>
+    <p>One control appears, or becomes usable, only when another is in the right state — without <code>if</code> statements scattered through your hub.</p>
+
+    <div class="code">
+      <div class="code-head"><span class="dots"><i></i><i></i><i></i></span> VisibleWhen / EnabledWhen</div>
+      <pre><code>Section:AddToggle("aimbot", { Title = "Aimbot" })
+
+Section:AddSlider("fov", { Title = "FOV", Min = 1, Max = 400, VisibleWhen = "aimbot" })
+
+Section:AddSegmented("mode", { Title = "Mode", Values = { "Legit", "Semi", "Rage" } })
+
+Section:AddToggle("silent", { Title = "Silent aim", VisibleWhen = { mode = "Rage" } })
+
+Section:AddSlider("hitchance", {
+    Title = "Hit chance", Min = 0, Max = 100,
+    EnabledWhen = { aimbot = true, mode = { "Rage", "Semi" } },
+})
+
+Section:AddToggle("extra", {
+    Title = "Extra",
+    VisibleWhen = function(options) return options.fov:GetValue() &gt; 100 end,
+})</code></pre>
+    </div>
+
+    <p>Both accept another option's id, a table of <code>{ id = value }</code> (where the value may be a list of accepted ones or a function), or a plain function. It re-evaluates itself whenever anything in the config changes.</p>
+
+    <h2 id="menu">Context menu</h2>
+    <p>Right-click any component:</p>
+
+    <ul>
+      <li><strong>Copy value</strong> — the current value to the clipboard.</li>
+      <li><strong>Reset to default</strong> — back to <code>Default</code>.</li>
+      <li><strong>Set key</strong> — captures a key that then toggles or fires that control.</li>
+      <li><strong>Pin to status bar</strong> — the value becomes a live field on the HUD bar. For a toggle or a button the field is <em>clickable</em>, so the feature can be used without opening the window at all. Pinning again unpins.</li>
+    </ul>
+
+    <div class="code">
+      <div class="code-head"><span class="dots"><i></i><i></i><i></i></span> your own entries</div>
+      <pre><code>Section:AddToggle("fly", {
+    Title = "Fly",
+    Key = Enum.KeyCode.F,
+    Menu = {
+        { Title = "Reset position", Icon = "map-pin", Callback = function() end },
+        { Title = "Copy config", Icon = "copy", Callback = function() end },
+    },
+})
+
+Section:AddButton({ Title = "No menu here", Menu = false })</code></pre>
+    </div>
+
+    <h2 id="palette">Command palette</h2>
+    <p><code>Ctrl+K</code> opens a search over everything: it finds any component in any tab, shows its path and current value, and <em>uses</em> it straight from the list — a toggle flips, a button runs, anything else scrolls into view.</p>
+
+    <div class="code">
+      <div class="code-head"><span class="dots"><i></i><i></i><i></i></span> palette</div>
+      <pre><code>local palette = Window:GetPalette()
+
+palette:AddAction({
+    Title = "Reload hub",
+    Icon = "rotate-ccw",
+    Detail = "dev action",
+    Callback = function() DeaDx:Unload() end,
+})
+
+palette:SetKey(Enum.KeyCode.K, Enum.KeyCode.LeftControl)
+palette:Open()
+palette:Close()</code></pre>
+    </div>
+
+    <p>Arrows navigate, Enter uses, Esc closes. Matching is fuzzy, so <code>relo</code> finds <code>Reload hub</code>. Turn it off with <code>Palette = false</code> on the window.</p>
+
+    <h2 id="undo">Undo and redo</h2>
+    <p>Every change to a component with an id goes into a 120-step history. <strong>No keys are bound by default</strong> — you opt in.</p>
+
+    <div class="code">
+      <div class="code-head"><span class="dots"><i></i><i></i><i></i></span> history</div>
+      <pre><code>DeaDx:Undo()      DeaDx:Redo()
+DeaDx:CanUndo()   DeaDx:CanRedo()
+DeaDx.Config:ClearHistory()
+
+Window:SetUndoKeys(Enum.KeyCode.Z, Enum.KeyCode.Y)   -- opt in, modifier required
+
+Window:GetPalette():AddAction({
+    Title = "Undo", Icon = "undo-2",
+    Callback = function() DeaDx:Undo() end,
+})</code></pre>
+    </div>
+
+    <h2 id="tour">Guided tour</h2>
+    <p>Walks a first-time user through the hub: dims everything, lights up one control at a time and explains it beside the spotlight. It changes tab and scrolls the page on its own to reach each target.</p>
+
+    <div class="code">
+      <div class="code-head"><span class="dots"><i></i><i></i><i></i></span> tour</div>
+      <pre><code>Window:Tour({
+    { Target = "aimbot", Title = "Aimbot", Text = "Turns the aim on. Right-click it to set a key." },
+    { Target = "fov", Title = "FOV", Text = "The circle radius." },
+    { Tab = "Visual", Target = "theme", Title = "Theme", Text = "Change the colours here." },
+    { Target = someFrame, Title = "Anything", Text = "A GuiObject works too.", Delay = 0.4 },
+}, {
+    Color = "#FF2D40",
+    OnFinish = function(skipped) print(skipped) end,
+})</code></pre>
+    </div>
+
+    <p>Arrows and Enter move, Esc skips. Each step takes <code>Delay</code> and <code>Run</code> (something to execute on arrival). The spotlight re-measures after the scroll settles, so the box lands exactly on the target even with animation still running.</p>
+
+    <h2 id="icons">Icons</h2>
+
+    <div class="code">
+      <div class="code-head"><span class="dots"><i></i><i></i><i></i></span> every accepted form</div>
+      <pre><code>Icon = "house"                        -- built-in catalog, 1559 icons, no download
+Icon = "iconsax:home"                 -- a remote provider, by name
+Icon = "https://my.site/rocket.svg"   -- remote SVG, parsed and drawn as vectors
+Icon = "https://my.site/logo.png"     -- remote PNG/JPG via getcustomasset
+Icon = "rbxassetid://123456"          -- a Roblox asset, straight through
+Icon = "rbxthumb://type=AvatarHeadShot&amp;id=1&amp;w=48&amp;h=48"
+Icon = "file:DeaDx/icons/mine.png"    -- a local file</code></pre>
+    </div>
+
+    <h2 id="icon-shapes">Photos and shapes</h2>
+    <p>A photo is a first-class icon. Point <code>Icon</code> at an avatar, a decal you uploaded or a PNG on the web and it is drawn as the photo it is — <strong>not</strong> tinted into a flat silhouette. Only the monochrome sets (the catalog, Lucide, Iconsax) take the theme colour, which is what you want from them.</p>
+
+    <div class="code">
+      <div class="code-head"><span class="dots"><i></i><i></i><i></i></span> a photo in any icon slot</div>
+      <pre><code>local me = game.Players.LocalPlayer
+
+Window:AddTab({
+    Title = "Profile",
+    Icon = "rbxthumb://type=AvatarHeadShot&amp;id=" .. me.UserId .. "&amp;w=150&amp;h=150",
+    IconShape = "Circle",
+})
+
+Section:AddButton({ Title = "My decal", Icon = "rbxassetid://121962391563311" })
+Section:AddButton({ Title = "From the web", Icon = "https://my.site/logo.png", IconShape = "Rounded" })</code></pre>
+    </div>
+
+    <h3>The three shapes</h3>
+    <p>Every icon slot in the library — window, tab, section, card, component, status bar, notification, dialog, loading screen — takes the same five fields.</p>
+
+    <table>
+      <thead><tr><th>Field</th><th>Values</th><th>What it does</th></tr></thead>
+      <tbody>
+        <tr><td><code>IconShape</code></td><td><code>"Square"</code> <code>"Rounded"</code> <code>"Circle"</code></td><td>Sharp corners, softly rounded corners, or a full circle. Default is <code>Square</code>, so nothing changes until you ask for it.</td></tr>
+        <tr><td><code>IconCorner</code></td><td>a number, or <code>"Full"</code></td><td>An exact corner radius in pixels, when the three presets are not what you want. Overrides <code>IconShape</code>.</td></tr>
+        <tr><td><code>IconTint</code></td><td><code>true</code> / <code>false</code></td><td>Force the theme tint on or off. Photos are untinted and catalog icons are tinted unless you say otherwise.</td></tr>
+        <tr><td><code>IconScale</code></td><td><code>"Fit"</code> <code>"Crop"</code> <code>"Stretch"</code></td><td>How the image fills the slot. <code>Rounded</code> and <code>Circle</code> default to <code>Crop</code> so a non-square photo fills the shape instead of leaving gaps.</td></tr>
+        <tr><td><code>IconSize</code></td><td>a number</td><td>The icon's side in pixels. The row makes space for it, so a 34px avatar does not sit on top of the title.</td></tr>
+      </tbody>
+    </table>
+
+    <div class="code">
+      <div class="code-head"><span class="dots"><i></i><i></i><i></i></span> the same photo, three ways</div>
+      <pre><code>local HEAD = "rbxthumb://type=AvatarHeadShot&amp;id=" .. me.UserId .. "&amp;w=150&amp;h=150"
+
+Section:AddButton({ Title = "Square", Icon = HEAD, IconShape = "Square", IconSize = 34 })
+Section:AddButton({ Title = "Rounded", Icon = HEAD, IconShape = "Rounded", IconSize = 34 })
+Section:AddButton({ Title = "Circle", Icon = HEAD, IconShape = "Circle", IconSize = 34 })
+Section:AddButton({ Title = "Exactly 4px", Icon = HEAD, IconCorner = 4 })
+
+Section:AddButton({ Title = "Catalog icon in a circle", Icon = "rocket", IconShape = "Circle" })
+Section:AddButton({ Title = "Catalog icon, raw colours", Icon = "rocket", IconTint = false })</code></pre>
+    </div>
+
+    <div class="code">
+      <div class="code-head"><span class="dots"><i></i><i></i><i></i></span> changing it later</div>
+      <pre><code>local row = Section:AddToggle("esp", { Title = "ESP", Icon = HEAD })
+
+row:SetIconShape("Circle")
+row:SetIconShape("Rounded", 6)
+row:SetIconTint(false)
+
+Window:SetIconShape("Circle")
+Tab:SetIconShape("Square")</code></pre>
+    </div>
+
+    <h3>Registering a photo under a name</h3>
+    <div class="code">
+      <div class="code-head"><span class="dots"><i></i><i></i><i></i></span> RegisterIcon with a shape</div>
+      <pre><code>DeaDx:RegisterIcon("brand", {
+    Source = "https://my.site/logo.png",
+    Shape = "Circle",
+    Tint = false,
+})
+
+Window:AddTab({ Title = "Hub", Icon = "brand" })</code></pre>
+    </div>
+
+    <div class="note warn">
+      <span class="ico"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round"><path d="M12 9v4M12 17h.01"/><path d="M10.3 3.3 2.5 17a2 2 0 0 0 1.7 3h15.6a2 2 0 0 0 1.7-3L13.7 3.3a2 2 0 0 0-3.4 0z"/></svg></span>
+      <strong>If a photo from a url does not show up</strong>, the library now says why in the console instead of quietly falling back. Roblox only draws <strong>PNG and JPG</strong>, and some hosts refuse Roblox's requests outright — Wikipedia answers with an HTML page, for example. GitHub raw, Imgur and most CDNs are fine. When in doubt, upload the image as a Roblox decal and use <code>rbxassetid://</code>, which needs no download at all.
+    </div>
+
+    <h3 id="providers">Cache and providers</h3>
+    <p>Anything external is saved <strong>by its name</strong> to <code>DeaDx/icons/&lt;name&gt;.png</code> (or <code>.svg</code> plus <code>.json</code> for a vector), with <code>index.json</code> holding the url, a content hash and the size. The next run reads it from disk in about a millisecond. In the background the library re-fetches once per session and compares the hash: <strong>if the content changed it overwrites the file and the live icons refresh themselves</strong>.</p>
+
+    <div class="code">
+      <div class="code-head"><span class="dots"><i></i><i></i><i></i></span> icon API</div>
+      <pre><code>DeaDx:SetIconProvider("lucide")     -- lucide · iconsax · or your own
+DeaDx:GetIconProvider()
+DeaDx:GetIconProviders()
+DeaDx:SetIconTemplate("iconsax", "https://mycdn/%s.svg")
+DeaDx:RegisterIconProvider("mine", function(name) return "https://cdn/" .. name .. ".svg" end)
+
+DeaDx:RegisterIcon("logo", "https://my.site/logo.png")
+DeaDx:ImportIcon("inline", svgString)
+
+DeaDx:SetIconVerify(false)   -- cache only, never re-check
+DeaDx:GetIconStats()         -- { Cached, Hits, Misses, Bytes }
+DeaDx:ForgetIcon("rocket")
+DeaDx:ClearIconCache()
+DeaDx:ListIcons()
+
+DeaDx.IconStore.Updated:Connect(function(name) print(name, "refreshed") end)</code></pre>
+    </div>
+
+    <p>A downloaded SVG is parsed properly — <code>path</code>, <code>line</code>, <code>circle</code>, <code>ellipse</code>, <code>rect</code>, <code>polyline</code> and <code>polygon</code>, with béziers and arcs flattened — then drawn as vectors, so it takes the theme colour, accepts a gradient and stays sharp at any size.</p>
+
+    <p><a class="btn outline" href="icons.html">Browse all 1559 icons</a></p>
+
+    <h2 id="markup">Text markup</h2>
+    <p>Any text field — titles, descriptions, notifications, footers — goes through the markup parser.</p>
+
+    <div class="code">
+      <div class="code-head"><span class="dots"><i></i><i></i><i></i></span> markup tags</div>
+      <pre><code>"&lt;red&gt;danger&lt;/red&gt;  &lt;#FF2D40&gt;hex&lt;/#FF2D40&gt;  &lt;color:#38BDF8&gt;another way&lt;/color&gt;"
+"&lt;gradient:#FF2D40:#FACC15&gt;per-letter gradient&lt;/gradient&gt;  &lt;rainbow&gt;rainbow&lt;/rainbow&gt;"
+"&lt;b&gt;bold&lt;/b&gt; &lt;i&gt;italic&lt;/i&gt; &lt;u&gt;underline&lt;/u&gt; &lt;s&gt;strike&lt;/s&gt;"
+"&lt;size:18&gt;bigger&lt;/size&gt; &lt;fade:0.4&gt;dimmed&lt;/fade&gt;  line one&lt;br&gt;line two"
+
+DeaDx:RegisterColor("brand", "#FF2D40")
+"&lt;brand&gt;uses my own name&lt;/brand&gt;"</code></pre>
+    </div>
+
+    <p>Every colour field in the library accepts a <code>Color3</code>, a <code>"#RRGGBB"</code> string, a theme token such as <code>"Accent"</code>, or a list of stops to make it a gradient.</p>
+
+    <h2 id="themes">Themes</h2>
+    <p>Eleven built in: <code>DeaDx</code> <code>Dark</code> <code>Darker</code> <code>Amoled</code> <code>Light</code> <code>Midnight</code> <code>Crimson</code> <code>Ocean</code> <code>Forest</code> <code>Amethyst</code> <code>Sunset</code>.</p>
+
+    <div class="code">
+      <div class="code-head"><span class="dots"><i></i><i></i><i></i></span> themes</div>
+      <pre><code>DeaDx:SetTheme("Midnight")
+DeaDx:SetAccent("#38BDF8")
+DeaDx:GetTheme()        DeaDx:GetThemes()
+
+DeaDx:RegisterTheme("Mine", { Base = "Dark", Accent = Color3.fromRGB(255, 45, 64) })
+DeaDx:SetTheme({ Name = "Inline", Base = "Dark", Accent = Color3.new(1, 0, 0) })
+
+DeaDx:LockTheme("DeaDx")    DeaDx:UnlockTheme()    DeaDx:IsThemeLocked()
+DeaDx:LockScale(1)          DeaDx:UnlockScale()    DeaDx:IsScaleLocked()
+DeaDx:SetFont(Enum.Font.GothamMedium)
+DeaDx:SetScale(1.1)</code></pre>
+    </div>
+
+    <p>Tokens: <code>Background</code> <code>SecondaryBackground</code> <code>TertiaryBackground</code> <code>Text</code> <code>MutedText</code> <code>Accent</code> <code>AccentText</code> <code>Border</code> <code>Hover</code> <code>Pressed</code> <code>Success</code> <code>Warning</code> <code>Error</code> <code>Info</code> <code>Overlay</code> <code>AcrylicTint</code> <code>AcrylicGradient</code> <code>AcrylicNoise</code> <code>AcrylicTransparency</code> <code>ElementTransparency</code> <code>ComponentTransparency</code> <code>ComponentStrokeTransparency</code>.</p>
+
+    <h3>Theme editor, in one line</h3>
+    <div class="code">
+      <div class="code-head"><span class="dots"><i></i><i></i><i></i></span> theme editor</div>
+      <pre><code>local Theme = Window:AddTab({ Title = "Theme", Icon = "palette" })
+DeaDx:AddThemeEditor(Theme, { Name = "MyTheme" })
+
+local source = DeaDx:ExportTheme("MyTheme")   -- the Lua table, as a string</code></pre>
+    </div>
+
+    <p>That builds a whole tab: a colorpicker per token, transparency sliders, copy-the-table and save-as-a-new-theme.</p>
+
+    <h2 id="animations">Animations</h2>
+    <p>Everything goes through one animation service with named easings: <code>Smooth</code> (Quint), <code>Soft</code> (Sine), <code>Snap</code> (Back), <code>Glide</code> (Cubic InOut).</p>
+
+    <div class="code">
+      <div class="code-head"><span class="dots"><i></i><i></i><i></i></span> animation</div>
+      <pre><code>local Animation = import("Services/Animation")
+
+Animation:Play(object, { Size = UDim2.fromOffset(200, 40) }, { Duration = 0.26, Ease = "Smooth" })
+Animation:Snap(object, { Scale = 1 })
+Animation:Sequence(list, function(item, index, delay) end)
+
+Animation.Enabled = false   -- turn the lot off, for accessibility or low FPS</code></pre>
+    </div>
+
+    <p>The details that went in without ever announcing themselves: components stagger in as a tab opens, an accent rail slides out on hover, popups scale open from the right edge, sections and cards collapse with the height animated instead of vanishing, icon colour changes are interpolated, the window opens with a small pop, the toggle knob stretches as it travels, the slider knob grows while dragged, the dropdown chevron rotates, and a keybind pulses a glow on its border when the key changes.</p>
+
+    <h2 id="notifications">Notifications and dialogs</h2>
+
+    <div class="code">
+      <div class="code-head"><span class="dots"><i></i><i></i><i></i></span> notify, ask, prompt</div>
+      <pre><code>DeaDx:Notify({
+    Title = "Ready",
+    Content = "All set. &lt;gradient:#FF2D40:#FACC15&gt;by ServerDead&lt;/gradient&gt;",
+    Type = "Success",      -- Info · Success · Warning · Error
+    Duration = 5,
+    Icon = "check",
+})
+
+local ask = DeaDx:Ask({
+    Title = "Confirm",
+    Content = "Turn the aimbot on?",
+    Options = { "Yes", "No" },
+})
+ask:OnAnswer(function(choice) print(choice) end)
+local choice = ask:Wait()
+
+local prompt = DeaDx:Prompt({ Title = "Name", Input = "type here" })
+local text = prompt:Wait()</code></pre>
+    </div>
+
+    <div class="code">
+      <div class="code-head"><span class="dots"><i></i><i></i><i></i></span> controlling the stack</div>
+      <pre><code>DeaDx:SetNotificationSide("BottomRight")
+DeaDx:SetNotificationMax(6)
+DeaDx:SetNotificationWidth(282)
+DeaDx:CloseNotifications()
+
+local toast = DeaDx:Notify({ Title = "Downloading", Content = "0%" })
+toast:Update({ Content = "40%" })
+toast:SetProgress(0.4)
+toast:Close()</code></pre>
+    </div>
+
+    <p>They stack up to six, each one compact with an accent bar and a progress line.</p>
+
+    <h2 id="statusbar">Status bar</h2>
+    <p>A HUD bar outside the window — FPS, ping, a custom name, or any component the player pinned.</p>
+
+    <div class="code">
+      <div class="code-head"><span class="dots"><i></i><i></i><i></i></span> status bar</div>
+      <pre><code>local Status = DeaDx:CreateStatusBar({
+    Title = "&lt;gradient:#FF2D40:#FFFFFF&gt;DeaDx&lt;/gradient&gt;",
+    Icon = "activity",
+    Position = "TopCenter",
+
+    Fps = true, Ping = true, Players = true, Session = true,
+    Memory = false, Clock = false, Place = false,
+
+    Draggable = true,
+    Compact = false,
+})
+
+Status:AddField("kills", {
+    Label = "Kills",
+    Icon = "swords",
+    Value = function() return kills end,
+})
+
+Status:SetPosition("AboveHotbar")
+Status:SetTitle("New name")
+Status:RemoveField("kills")
+Status:Destroy()</code></pre>
+    </div>
+
+    <p>Positions: <code>TopLeft</code> <code>TopCenter</code> <code>TopRight</code> <code>MiddleLeft</code> <code>MiddleRight</code> <code>BottomLeft</code> <code>BottomCenter</code> <code>BottomRight</code> <code>Center</code> <code>AboveHotbar</code> <code>UnderTopbar</code> — or a <code>UDim2</code> plus an <code>Offset</code>.</p>
+
+    <h2 id="loading">Loading screen</h2>
+
+    <div class="code">
+      <div class="code-head"><span class="dots"><i></i><i></i><i></i></span> loading screen</div>
+      <pre><code>local loader = DeaDx:CreateLoadingScreen({
+    Title = "DeaDx",
+    Subtitle = "getting the hub ready",
+    Icon = "zap",
+    TitleGradient = { "#FF2D40", "#FFFFFF" },
+    Gradient = { "#FF2D40", "#FACC15" },
+    Steps = { "Checking the environment", "Loading icons", "Building the interface" },
+    Tips = { "Hold the top bar to drag the window" },
+    Footer = "by ServerDead",
+    MinDuration = 0,
+})
+
+loader:Run({                    -- runs each step for real, then closes itself
+    function() checkEnvironment() end,
+    function() loadIcons() end,
+    function() buildUi() end,
+})
+
+-- or drive it by hand
+loader:SetProgress(0.5, "halfway")
+loader:Step("next one")
+loader:Finish("Done")</code></pre>
+    </div>
+
+    <h2 id="console">Console</h2>
+
+    <div class="code">
+      <div class="code-head"><span class="dots"><i></i><i></i><i></i></span> logging</div>
+      <pre><code>DeaDx:Log("hub loaded", "Success", "boot")
+DeaDx:Log("no file permission", "Warning", "fs")
+DeaDx:Log("could not find the remote", "Error", "net")
+
+DeaDx:AddConsole(Section, { Height = 180 })
+
+DeaDx:MirrorLog(true)   -- also print/warn through the executor
+DeaDx:GetLog()          -- everything as text, for copying
+DeaDx:ClearLog()</code></pre>
+    </div>
+
+    <p>Levels <code>Info</code> <code>Success</code> <code>Warning</code> <code>Error</code> <code>Debug</code>, each with a timestamp, a tag and its own colour. The panel filters by text and by level, copies everything, clears, and follows new lines as they arrive.</p>
+
+    <h2 id="panels">Built-in panels</h2>
+
+    <div class="code">
+      <div class="code-head"><span class="dots"><i></i><i></i><i></i></span> two lines, two full panels</div>
+      <pre><code>DeaDx:AddConfigManager(Section)
+DeaDx:AddKeybinds(Section)</code></pre>
+    </div>
+
+    <p><strong>Config manager</strong> — a name field, the list of saved configs, save, load, delete (on a cooldown), refresh, auto-save, copy the JSON, paste a JSON to import, and reset everything.</p>
+    <p><strong>Keybind panel</strong> — every key bound in the hub, from <code>AddKeybind</code> and from controls that got a key through the context menu. Click a row to rebind, right-click to clear.</p>
+
+    <h2 id="config">Config</h2>
+    <p>Any component with an id is saved and restored.</p>
+
+    <div class="code">
+      <div class="code-head"><span class="dots"><i></i><i></i><i></i></span> config</div>
+      <pre><code>DeaDx:Save("myconfig")
+DeaDx:Load("myconfig")
+DeaDx:ListConfigs()
+DeaDx:DeleteConfig("old")
+DeaDx:SetAutoSave(true, "myconfig")
+DeaDx:ResetConfig()
+
+DeaDx.Options.fly:SetValue(true)   -- every id lives here
+DeaDx.Options.fov:GetValue()</code></pre>
+    </div>
+
+    <p>Files land in <code>DeaDx/configs/&lt;name&gt;.json</code>. <code>Color3</code>, <code>EnumItem</code> and <code>Vector2</code> come back as the right type, not as a table.</p>
+
+    <h2 id="keysystem">Key system</h2>
+    <p>You decide what a valid key is: a fixed key, a hash, a remote list, your own endpoint, or a whitelist by group, gamepass, asset, worn asset or username.</p>
+
+    <div class="code">
+      <div class="code-head"><span class="dots"><i></i><i></i><i></i></span> every key system field</div>
+      <pre><code>local key = DeaDx:CreateKeySystem({
+    Title = "DeaDx",
+    Note = "Join the group or grab a key in #keys.",
+    Salt = "ServerDead",
+
+    -- by key
+    Hashes = { DeaDx:Hash("MY-KEY", "ServerDead") },   -- the key itself is NOT in the script
+    Keys = { "TEST-KEY" },                              -- plain text, weak
+    Url = "https://my.site/keys.txt",                   -- remote list, one per line
+    Endpoint = "https://api.com/check?key={key}&amp;hwid={hwid}&amp;user={user}",
+    Expect = "VALID",
+    Validate = function(key, hwid) return false end,
+
+    -- by whitelist
+    Group = 1069605852, GroupRank = 0,
+    Gamepass = { 123456 },
+    Asset = { 987654 },      -- must own it
+    Wearing = { 987654 },    -- must be wearing it
+    Whitelist = { "ServerDead", 123456789 },
+    WhitelistUrl = "https://my.site/names.txt",
+    Premium = false,
+    Checks = {
+        { Label = "My own rule", Icon = "star", Run = function() return true end },
+    },
+
+    Require = "any",         -- "any" = one requirement unlocks; "all" = all of them plus the key
+
+    Attempts = 3, Lockout = 30,
+    Remember = true, ExpiresIn = 86400,
+    Integrity = true, BlockOnTamper = false, GuardInterval = 6,
+    Link = "https://discord.gg/…",
+
+    OnSuccess = function() end,
+    OnFail = function() end,
+    OnTamper = function(failures) end,
+})
+
+if not key:Wait() then return end</code></pre>
+    </div>
+
+    <p>Requirements render as a list with ✓ / ✗ and the reason for each failure; clicking a row re-checks it. A remembered key is stored in <code>DeaDx/key.dat</code> as a hash <strong>tied to the HWID</strong> (XOR against the HWID plus a derived token), so copying the file to another machine does nothing. The key text itself is never written to disk.</p>
+
+    <h2 id="measured">What it withstands — measured</h2>
+    <p>Run against the library in a real executor, not guessed at:</p>
+
+    <table>
+      <thead><tr><th>Attack</th><th>Result</th></tr></thead>
+      <tbody>
+        <tr><td><code>key:Destroy()</code> to kill the UI</td><td><span class="pill green">blocked</span> <code>Wait()</code> returns false</td></tr>
+        <tr><td><code>key._valid = true</code></td><td><span class="pill green">blocked</span> no such field — validity lives in a vault outside the instance</td></tr>
+        <tr><td><code>key:_Accept()</code></td><td><span class="pill green">blocked</span> not a public method</td></tr>
+        <tr><td>wrong key</td><td><span class="pill green">blocked</span></td></tr>
+        <tr><td><code>hookfunction</code> on <code>IsValid</code> / <code>Submit</code> / <code>Hash.Hmac</code></td><td><span class="pill amber">works, detected</span> the guard catches it within <code>GuardInterval</code> and fires <code>OnTamper</code></td></tr>
+        <tr><td><code>getgc</code> finding the vault and forging the seal</td><td><span class="pill red">works</span> no detection</td></tr>
+        <tr><td>hooking <code>isfunctionhooked</code> itself</td><td><span class="pill red">works</span> kills the detection</td></tr>
+      </tbody>
+    </table>
+
+    <div class="note warn">
+      <span class="ico"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round"><path d="M12 9v4M12 17h.01"/><path d="M10.3 3.3 2.5 17a2 2 0 0 0 1.7 3h15.6a2 2 0 0 0 1.7-3L13.7 3.3a2 2 0 0 0-3.4 0z"/></svg></span>
+      So: an honest gate against anyone who just pastes scripts, and a speed bump for anyone who knows their way around. It is not, and cannot be, proof against someone who controls the executor — <strong>your hub is already on their machine</strong>. The thing that actually closes that is <a href="#keyplus">Key+</a>, where there is no boolean to flip because the code is not there yet.
+    </div>
+
+    <div class="code">
+      <div class="code-head"><span class="dots"><i></i><i></i><i></i></span> turning the guard up</div>
+      <pre><code>DeaDx:CreateKeySystem({
+    Integrity = true,
+    GuardInterval = 6,
+    BlockOnTamper = true,
+    OnTamper = function(failures) DeaDx:Unload() end,
+})</code></pre>
+    </div>
+
+    <h2 id="luarmor">Luarmor</h2>
+    <p>If you already use Luarmor, DeaDx checks the key <strong>before</strong> the protected loadstring, so a wrong key gets a message in your window instead of a kick.</p>
+
+    <div class="code">
+      <div class="code-head"><span class="dots"><i></i><i></i><i></i></span> luarmor</div>
+      <pre><code>local key = DeaDx:CreateKeySystem({
+    Title = "DeaDx",
+    Subtitle = "Luarmor protected",
+    Note = "Grab your key in the Discord. It locks to your HWID on first use.",
+    Luarmor = {
+        ScriptId = "f42f3746fb3eb60f837d3673581c14a6",
+        Load = true,         -- call api.load_script() once the key validates
+    },
+    Link = "https://discord.gg/yourserver",
+    Remember = true,
+    Attempts = 3,
+    OnSuccess = function(_, info)
+        print(info.Executions, info.Note, info.SecondsLeft)
+    end,
+})
+key:Wait()</code></pre>
+    </div>
+
+    <p><code>Luarmor = "f42f…"</code> also works if the id is all you need.</p>
+
+    <h3>What it handles for you</h3>
+    <ul>
+      <li>Downloads the official <code>library.lua</code> once and reuses it.</li>
+      <li>Sets the <code>script_key</code> global before any loadstring, the way the docs ask.</li>
+      <li>Turns every status code into a line in the window — <code>KEY_EXPIRED</code>, <code>KEY_BANNED</code>, <code>KEY_HWID_LOCKED</code>, <code>KEY_INCORRECT</code>, <code>KEY_INVALID</code>, <code>INVALID_EXECUTOR</code>, <code>TIME_ERROR</code>, <code>UNKNOWN_ERROR</code>.</li>
+      <li><strong>Only burns an attempt when it is the user's fault.</strong> A wrong or malformed key costs an attempt; <code>SCRIPT_ID_INCORRECT</code>, <code>SCRIPT_ID_INVALID</code>, a server outage or a skewed clock do not — and the first two also warn you in the console.</li>
+      <li>With <code>Remember = true</code>, it re-validates the stored key against Luarmor on open instead of trusting the local file.</li>
+      <li>Stacks with the whitelist — <code>Group</code>, <code>Gamepass</code>, <code>Wearing</code> and the rest still apply alongside it.</li>
+    </ul>
+
+    <div class="code">
+      <div class="code-head"><span class="dots"><i></i><i></i><i></i></span> after validating</div>
+      <pre><code>local info = key:GetInfo()
+-- { Expire, Lifetime, SecondsLeft, Note, Executions, FromAd }
+
+key:GetStatus()     -- the raw API table
+key:LoadScript()    -- run api.load_script() yourself
+key:PurgeCache()    -- clear the protected script's cache</code></pre>
+    </div>
+
+    <div class="code">
+      <div class="code-head"><span class="dots"><i></i><i></i><i></i></span> without the window</div>
+      <pre><code>local status = DeaDx:Luarmor({ ScriptId = "f42f…" }, myKey)
+
+if status.code == "KEY_VALID" then
+    DeaDx:LuarmorLoad({ ScriptId = "f42f…" }, myKey)
+else
+    warn(status.message)
+end
+
+DeaDx:LuarmorInfo(status)
+DeaDx:LuarmorPurge({ ScriptId = "f42f…" })</code></pre>
+    </div>
+
+    <div class="note">
+      <span class="ico"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round"><path d="M12 16v-4M12 8h.01"/><circle cx="12" cy="12" r="10"/></svg></span>
+      Worth saying: Luarmor solves distributing and revoking keys, but the protected script still ends up on the user's machine. Checking early is for the experience, not extra armour.
+    </div>
+
+    <h2 id="keyplus">Key+</h2>
+    <p>In Key+ there is no <code>return true</code> to hook: <strong>what the server sends back is the hub itself, encrypted</strong>. Bypass the validation and there is nothing to run, because the code was never there.</p>
+
+    <p><strong>The secret never reaches the client.</strong> The decryption key is derived from the key the user typed, so the script you publish holds no secret at all:</p>
+
+    <ol>
+      <li>The client makes a random <code>nonce</code> and sends <code>key</code>, <code>hwid</code> and <code>nonce</code> to your site.</li>
+      <li>Your server validates the key however it likes — database, panel, Discord. That is where your <code>SECRET</code> is used, <strong>server-side only</strong>.</li>
+      <li>The server answers with <code>ts</code>, <code>nonce</code> and <code>data</code>, where<br><code>data = hex( XOR(script, keystream(HMAC-SHA256(user_key, "ukey|nonce|ts"))) )</code></li>
+      <li>The client checks the <code>ts</code> (five minutes) and the <code>nonce</code>, derives the same key from what was typed, and <strong>decrypts the hub</strong>. A wrong key produces garbage and nothing runs.</li>
+    </ol>
+
+    <div class="code">
+      <div class="code-head"><span class="dots"><i></i><i></i><i></i></span> key+ with the window</div>
+      <pre><code>local key = DeaDx:CreateKeySystem({
+    Title = "DeaDx",
+    Plus = {
+        Endpoint = "https://mysite.com/api/unlock",   -- {key} {hwid} {nonce} get filled in
+        Window = 300,                                 -- how long a response stays valid
+        BindHwid = false,
+    },
+    Remember = true,
+    OnUnlock = function(source)
+        loadstring(source)()      -- the real hub runs here
+    end,
+})
+key:Wait()</code></pre>
+    </div>
+
+    <p>If you want the response <strong>signed</strong> as well — one more layer against a fake endpoint — then pass a <code>Secret</code> on the client. It joins the signature and the derivation. That is optional, and only worth it if you accept that value sitting in the script:</p>
+
+    <div class="code">
+      <div class="code-head"><span class="dots"><i></i><i></i><i></i></span> signed mode</div>
+      <pre><code>Plus = { Endpoint = "https://mysite.com/api/unlock", Secret = "DecodeWord" }</code></pre>
+    </div>
+
+    <div class="code">
+      <div class="code-head"><span class="dots"><i></i><i></i><i></i></span> without the UI</div>
+      <pre><code>local source, reason = DeaDx:KeyPlus({ Endpoint = "…" }, "USER-KEY")
+if not source then return warn(reason) end
+loadstring(source)()
+
+DeaDx:KeyPlusRun({ Endpoint = "…" }, "USER-KEY")</code></pre>
+    </div>
+
+    <p>Rejected automatically, all before anything is decrypted: wrong secret, wrong key, forged signature, swapped nonce, and a stale response (replay).</p>
+
+    <p>Forcing the validation gets you nowhere — flipping the internal state lets the window close, but <code>GetPayload()</code> stays <code>nil</code>, <code>RunPayload()</code> answers "missing payload" and <code>OnUnlock</code> never fires. Without a legitimate response there is no hub to run.</p>
+
+    <h3>What Key+ still does not solve</h3>
+    <ul>
+      <li>Anyone with a <strong>valid</strong> key receives the hub in memory and can dump it. Key+ stops access <em>without</em> a key; it does not stop a leak from someone who paid. Mark the payload per key on the server and you will know whose copy leaked.</li>
+      <li>If your endpoint has no rate limit, keys can be brute-forced against it.</li>
+      <li>With <code>Remember = true</code> the key sits on disk scrambled with the HWID. That protects against copying the file to another machine, not against someone already on that machine.</li>
+      <li>The payload is only worth what is inside it. If the hub is also embedded in the script that calls Key+, none of this bought you anything.</li>
+    </ul>
+
+    <h2 id="keyplus-server">What your Key+ server must do</h2>
+
+    <div class="code">
+      <div class="code-head"><span class="dots"><i></i><i></i><i></i></span> the protocol</div>
+      <pre><code data-lang="text">GET /api/unlock?key=&lt;key&gt;&amp;hwid=&lt;hwid&gt;&amp;nonce=&lt;nonce&gt;&amp;v=1
+
+1. validate &lt;key&gt; in your database (your SECRET is used here and NEVER leaves the server)
+2. ts    = unix time now
+3. skey  = HMAC_SHA256(key, "ukey|" + nonce + "|" + ts)
+4. ks    = SHA256(skey + ":0") .. SHA256(skey + ":1") .. …   (raw bytes, up to the script length)
+5. data  = hex(script XOR ks)
+6. answer {"v":1,"ts":ts,"nonce":nonce,"data":data}
+
+on error: {"error":"invalid key"}</code></pre>
+    </div>
+
+    <p>In signed mode, swap <code>key</code> for your <code>SECRET</code> in step 3 (tag <code>stream</code> instead of <code>ukey</code>) and add<br><code>sig = HMAC_SHA256(SECRET, "v1|" + key + "|" + hwid + "|" + nonce + "|" + ts)</code> to the response.</p>
+
+    <p><code>sig</code> in lowercase hex. <code>data</code> accepts hex or base64. The script may start with <code>--DEADX</code> so the client can recognise the content without compiling it. With <code>BindHwid = true</code> the <code>hwid</code> enters the derivation too.</p>
+
+    <div class="code">
+      <div class="code-head"><span class="dots"><i></i><i></i><i></i></span> testing with no server at all</div>
+      <pre><code>local cfg = { Endpoint = "https://x" }
+
+local response = DeaDx:KeyPlusPack(
+    cfg, "KEY", DeaDx:GetHwid(), nil, os.time(), "--DEADX\nprint('ok')"
+)
+
+local source, reason = DeaDx:KeyPlusOpen(
+    cfg, "KEY", DeaDx:GetHwid(), response.nonce, response
+)
+
+print(source, reason)</code></pre>
+    </div>
+
+    <h2 id="integrity">Anti-hook</h2>
+
+    <div class="code">
+      <div class="code-head"><span class="dots"><i></i><i></i><i></i></span> integrity</div>
+      <pre><code>local report = DeaDx:Integrity()
+-- { Clean = true, Failures = {}, Detection = { IsFunctionHooked = true, … } }
+
+DeaDx:GuardIntegrity(6, function(failures)
+    DeaDx:Notify({ Title = "Environment changed", Content = failures[1], Type = "Error" })
+end)</code></pre>
+    </div>
+
+    <p>Uses <code>isfunctionhooked</code>, <code>iscclosure</code>, <code>islclosure</code>, <code>getrawmetatable</code> and <code>checkcaller</code> when the executor provides them. It checks <code>game.HttpGet</code>, <code>GetService</code>, <code>JSONDecode/Encode</code>, <code>UserOwnsGamePassAsync</code>, <code>PlayerOwnsAsset</code>, <code>IsInGroup</code>, <code>GetRankInGroup</code>, <code>string.*</code>, <code>table.concat</code>, <code>bit32.bxor</code>, <code>os.time</code>, and the <code>__namecall</code> / <code>__index</code> metamethods on <code>game</code>. Anything the executor does not expose is skipped rather than thrown.</p>
+
+    <h2 id="api">Full API surface</h2>
+
+    <table>
+      <thead><tr><th>Group</th><th>Calls</th></tr></thead>
+      <tbody>
+        <tr><td>Windows</td><td><code>CreateWindow</code> <code>CreateStatusBar</code> <code>StatusBarAnchors</code> <code>CreateLoadingScreen</code> <code>Unload</code> <code>GetStats</code> <code>GetVersion</code></td></tr>
+        <tr><td>Notifications</td><td><code>Notify</code> <code>Ask</code> <code>Prompt</code> <code>SetNotificationSide</code> <code>SetNotificationMax</code> <code>SetNotificationWidth</code> <code>CloseNotifications</code></td></tr>
+        <tr><td>Themes</td><td><code>SetTheme</code> <code>GetTheme</code> <code>GetThemes</code> <code>RegisterTheme</code> <code>SetAccent</code> <code>SetFont</code> <code>SetScale</code> <code>LockTheme</code> <code>UnlockTheme</code> <code>IsThemeLocked</code> <code>LockScale</code> <code>UnlockScale</code> <code>IsScaleLocked</code> <code>AddThemeEditor</code> <code>ExportTheme</code></td></tr>
+        <tr><td>Icons</td><td><code>SetIconProvider</code> <code>GetIconProvider</code> <code>GetIconProviders</code> <code>RegisterIconProvider</code> <code>SetIconTemplate</code> <code>RegisterIcon</code> <code>ImportIcon</code> <code>SetIconVerify</code> <code>GetIconStats</code> <code>ClearIconCache</code> <code>ForgetIcon</code> <code>ListIcons</code></td></tr>
+        <tr><td>Config</td><td><code>Save</code> <code>Load</code> <code>DeleteConfig</code> <code>ListConfigs</code> <code>SetAutoSave</code> <code>ResetConfig</code> <code>Undo</code> <code>Redo</code> <code>CanUndo</code> <code>CanRedo</code> <code>AddConfigManager</code> <code>AddKeybinds</code></td></tr>
+        <tr><td>Keys</td><td><code>CreateKeySystem</code> <code>Hash</code> <code>GetHwid</code> <code>Luarmor</code> <code>LuarmorLoad</code> <code>LuarmorPurge</code> <code>LuarmorInfo</code> <code>KeyPlus</code> <code>KeyPlusRun</code> <code>KeyPlusPack</code> <code>KeyPlusOpen</code></td></tr>
+        <tr><td>Logs</td><td><code>Log</code> <code>ClearLog</code> <code>GetLog</code> <code>MirrorLog</code> <code>AddConsole</code></td></tr>
+        <tr><td>Integrity</td><td><code>Integrity</code> <code>GuardIntegrity</code></td></tr>
+        <tr><td>Extending</td><td><code>RegisterComponent</code> <code>RegisterColor</code> <code>SetAcrylicAssets</code> <code>SetDebug</code></td></tr>
+        <tr><td>Fields</td><td><code>Version</code> <code>Credit</code> <code>Options</code> <code>Windows</code> <code>StatusBars</code> <code>Screens</code> <code>LoadTime</code> <code>Theme</code> <code>Config</code> <code>Icons</code> <code>IconStore</code> <code>Markup</code> <code>State</code> <code>Signal</code> <code>Capabilities</code> <code>Component</code></td></tr>
+      </tbody>
+    </table>
+
+    <h2 id="faq">FAQ</h2>
+
+    <h3>Does it work on mobile?</h3>
+    <p>Yes, and that is not an afterthought — every control is touch-tested. The window drags from the top bar, sliders track a finger, dropdowns scroll, and the status bar can sit above the hotbar where a thumb reaches it.</p>
+
+    <h3>What does it need from the executor?</h3>
+    <p>Nothing mandatory. <code>Capabilities</code> probes for file access, <code>getcustomasset</code>, <code>gethui</code>, HTTP and the integrity functions, and degrades instead of erroring. No file access means icons are not cached and configs stay in memory; everything else carries on.</p>
+
+    <h3>Can I load it twice?</h3>
+    <p>Yes. The second load unloads the first, so nothing is left behind.</p>
+
+    <h3>How do I keep users on my theme?</h3>
+    <p><code>LockTheme</code> and <code>LockScale</code> on the window, or <code>DeaDx:LockTheme(name)</code> at any point. The theme editor then refuses to change it.</p>
+
+    <h3>Which protection should I use?</h3>
+    <p>Key system for a gate that is easy to run yourself. Luarmor if you already pay for it and want key distribution handled. Key+ if it actually matters that people without a key cannot get the code — it is the only one where the hub is not on their machine until your server says so.</p>
+
+    <h3>Who gets the credit?</h3>
+    <p><strong>ServerDead</strong>. All of it.</p>
+
+  </main>
+</div>
+
+<footer class="footer">
+  <div class="container">
+    <span>DeaDx &middot; built by <strong>ServerDead</strong></span>
+    <span>
+      <a href="index.html">Home</a> &nbsp;·&nbsp;
+      <a href="icons.html">Icons</a> &nbsp;·&nbsp;
+      <a href="#install">Back to the top</a>
+    </span>
+  </div>
+</footer>
+
+<script src="assets/app.js"></script>
+</body>
+</html>
